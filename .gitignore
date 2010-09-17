@@ -1,5 +1,7 @@
 obj
 bin
+sql
 *.suo
 *.user
+*.dbmdl
 _ReSharper.*
