@@ -1,9 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System.Configuration;
 using System.Web.Mvc;
 using System.Web.Routing;
+using Commons;
+using Migrations;
 
 namespace WebApp
 {
@@ -21,14 +20,19 @@ namespace WebApp
                 "{controller}/{action}/{id}", // URL with parameters
                 new { controller = "Home", action = "Index", id = UrlParameter.Optional } // Parameter defaults
             );
-
         }
 
         protected void Application_Start()
         {
             AreaRegistration.RegisterAllAreas();
-
             RegisterRoutes(RouteTable.Routes);
+            MigrateDatabase();
+        }
+
+        private static void MigrateDatabase()
+        {
+            string connectionString = ConfigurationManager.ConnectionStrings[Constants.ConnectionStringName].ConnectionString;
+            ExternallyCallableMigration.MigrateToLastVersion(Constants.DatabaseProvider, connectionString);
         }
     }
 }
