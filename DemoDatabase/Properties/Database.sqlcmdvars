@@ -1,6 +1,14 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<SqlCommandVariables xmlns="urn:Microsoft.VisualStudio.Data.Schema.Package.SqlCmdVars" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<SqlCommandVariables xmlns="urn:Microsoft.VisualStudio.Data.Schema.Package.SqlCmdVars">
   <Version>1.0</Version>
   <Properties>
+    <Property>
+      <PropertyName>Path1</PropertyName>
+      <PropertyValue>D:\Presentations\MVC\</PropertyValue>
+    </Property>
+    <Property>
+      <PropertyName>Path2</PropertyName>
+      <PropertyValue>D:\Presentations\MVC\</PropertyValue>
+    </Property>
   </Properties>
 </SqlCommandVariables>

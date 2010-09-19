@@ -1,44 +1,578 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Permissions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="urn:Microsoft.VisualStudio.Data.Schema.Permissions" Version="1.0">
-  <!--  The examples below are provided to illustrate how permissions 
-        are defined in the project system for Databases, Objects, 
-        and Columns.
-        
-        GRANT Database Permissions
-        
-        <PermissionStatement Action ="GRANT">
-          <Permission>CREATE TABLE</Permission>
-          <Grantee>User1</Grantee>
-        </PermissionStatement>
-        
-        GRANT Object Permission
-        
-        <PermissionStatement Action ="GRANT">
-          <Permission>SELECT</Permission>
-          <Grantee>User1</Grantee>
-          <Object Name ="Table1" Schema ="User1" Type ="OBJECT"/>
-        </PermissionStatement>
-
-        DENY Object Permission
-        
-        <PermissionStatement Action ="DENY">
-          <Permission>DELETE</Permission>
-          <Grantee>User1</Grantee>
-          <Object Name ="Table1" Schema ="User1" Type ="OBJECT"/>
-        </PermissionStatement>
-
-        GRANT Object Column Permission
-        
-        <PermissionStatement Action ="GRANT">
-          <Permission>SELECT</Permission>
-          <Grantee>User1</Grantee>
-          <Object Name ="Table1" Schema ="User1" Type ="OBJECT">
-            <Columns Treatment ="INCLUDE">
-              <Column Name="Col1"/>
-              <Column Name="Col2"/>
-              <Column Name="…"/>
-            </Columns>
-          </Object>
-        </PermissionStatement>
-  -->
+<Permissions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:dns="urn:Microsoft.VisualStudio.Data.Schema.Permissions" Version="1.0" xmlns="urn:Microsoft.VisualStudio.Data.Schema.Permissions">
+  <PermissionStatement Action="GRANT">
+    <Permission>CONNECT</Permission>
+    <Grantee>dbo</Grantee>
+    <Grantor>dbo</Grantor>
+  </PermissionStatement>
+  <PermissionStatement Action="GRANT">
+    <Permission>EXECUTE</Permission>
+    <Grantee>aspnet_Membership_FullAccess</Grantee>
+    <Object Name="aspnet_Users_DeleteUser" Schema="dbo" Type="OBJECT" />
+    <Grantor>dbo</Grantor>
+  </PermissionStatement>
+  <PermissionStatement Action="GRANT">
+    <Permission>EXECUTE</Permission>
+    <Grantee>aspnet_Membership_FullAccess</Grantee>
+    <Object Name="aspnet_Membership_CreateUser" Schema="dbo" Type="OBJECT" />
+    <Grantor>dbo</Grantor>
+  </PermissionStatement>
+  <PermissionStatement Action="GRANT">
+    <Permission>EXECUTE</Permission>
+    <Grantee>aspnet_Membership_FullAccess</Grantee>
+    <Object Name="aspnet_Membership_SetPassword" Schema="dbo" Type="OBJECT" />
+    <Grantor>dbo</Grantor>
+  </PermissionStatement>
+  <PermissionStatement Action="GRANT">
+    <Permission>EXECUTE</Permission>
+    <Grantee>aspnet_Membership_FullAccess</Grantee>
+    <Object Name="aspnet_Membership_ResetPassword" Schema="dbo" Type="OBJECT" />
+    <Grantor>dbo</Grantor>
+  </PermissionStatement>
+  <PermissionStatement Action="GRANT">
+    <Permission>EXECUTE</Permission>
+    <Grantee>aspnet_Membership_FullAccess</Grantee>
+    <Object Name="aspnet_Membership_UnlockUser" Schema="dbo" Type="OBJECT" />
+    <Grantor>dbo</Grantor>
+  </PermissionStatement>
+  <PermissionStatement Action="GRANT">
+    <Permission>EXECUTE</Permission>
+    <Grantee>aspnet_Membership_FullAccess</Grantee>
+    <Object Name="aspnet_Membership_UpdateUser" Schema="dbo" Type="OBJECT" />
+    <Grantor>dbo</Grantor>
+  </PermissionStatement>
+  <PermissionStatement Action="GRANT">
+    <Permission>EXECUTE</Permission>
+    <Grantee>aspnet_Membership_FullAccess</Grantee>
+    <Object Name="aspnet_Membership_ChangePasswordQuestionAndAnswer" Schema="dbo" Type="OBJECT" />
+    <Grantor>dbo</Grantor>
+  </PermissionStatement>
+  <PermissionStatement Action="GRANT">
+    <Permission>EXECUTE</Permission>
+    <Grantee>aspnet_Membership_BasicAccess</Grantee>
+    <Object Name="aspnet_RegisterSchemaVersion" Schema="dbo" Type="OBJECT" />
+    <Grantor>dbo</Grantor>
+  </PermissionStatement>
+  <PermissionStatement Action="GRANT">
+    <Permission>EXECUTE</Permission>
+    <Grantee>aspnet_Membership_BasicAccess</Grantee>
+    <Object Name="aspnet_CheckSchemaVersion" Schema="dbo" Type="OBJECT" />
+    <Grantor>dbo</Grantor>
+  </PermissionStatement>
+  <PermissionStatement Action="GRANT">
+    <Permission>EXECUTE</Permission>
+    <Grantee>aspnet_Membership_BasicAccess</Grantee>
+    <Object Name="aspnet_UnRegisterSchemaVersion" Schema="dbo" Type="OBJECT" />
+    <Grantor>dbo</Grantor>
+  </PermissionStatement>
+  <PermissionStatement Action="GRANT">
+    <Permission>EXECUTE</Permission>
+    <Grantee>aspnet_Membership_BasicAccess</Grantee>
+    <Object Name="aspnet_Membership_GetUserByName" Schema="dbo" Type="OBJECT" />
+    <Grantor>dbo</Grantor>
+  </PermissionStatement>
+  <PermissionStatement Action="GRANT">
+    <Permission>EXECUTE</Permission>
+    <Grantee>aspnet_Membership_BasicAccess</Grantee>
+    <Object Name="aspnet_Membership_GetUserByUserId" Schema="dbo" Type="OBJECT" />
+    <Grantor>dbo</Grantor>
+  </PermissionStatement>
+  <PermissionStatement Action="GRANT">
+    <Permission>EXECUTE</Permission>
+    <Grantee>aspnet_Membership_BasicAccess</Grantee>
+    <Object Name="aspnet_Membership_GetUserByEmail" Schema="dbo" Type="OBJECT" />
+    <Grantor>dbo</Grantor>
+  </PermissionStatement>
+  <PermissionStatement Action="GRANT">
+    <Permission>EXECUTE</Permission>
+    <Grantee>aspnet_Membership_BasicAccess</Grantee>
+    <Object Name="aspnet_Membership_GetPasswordWithFormat" Schema="dbo" Type="OBJECT" />
+    <Grantor>dbo</Grantor>
+  </PermissionStatement>
+  <PermissionStatement Action="GRANT">
+    <Permission>EXECUTE</Permission>
+    <Grantee>aspnet_Membership_BasicAccess</Grantee>
+    <Object Name="aspnet_Membership_UpdateUserInfo" Schema="dbo" Type="OBJECT" />
+    <Grantor>dbo</Grantor>
+  </PermissionStatement>
+  <PermissionStatement Action="GRANT">
+    <Permission>EXECUTE</Permission>
+    <Grantee>aspnet_Membership_BasicAccess</Grantee>
+    <Object Name="aspnet_Membership_GetPassword" Schema="dbo" Type="OBJECT" />
+    <Grantor>dbo</Grantor>
+  </PermissionStatement>
+  <PermissionStatement Action="GRANT">
+    <Permission>EXECUTE</Permission>
+    <Grantee>aspnet_Membership_BasicAccess</Grantee>
+    <Object Name="aspnet_Membership_GetNumberOfUsersOnline" Schema="dbo" Type="OBJECT" />
+    <Grantor>dbo</Grantor>
+  </PermissionStatement>
+  <PermissionStatement Action="GRANT">
+    <Permission>EXECUTE</Permission>
+    <Grantee>aspnet_Membership_ReportingAccess</Grantee>
+    <Object Name="aspnet_RegisterSchemaVersion" Schema="dbo" Type="OBJECT" />
+    <Grantor>dbo</Grantor>
+  </PermissionStatement>
+  <PermissionStatement Action="GRANT">
+    <Permission>EXECUTE</Permission>
+    <Grantee>aspnet_Membership_ReportingAccess</Grantee>
+    <Object Name="aspnet_CheckSchemaVersion" Schema="dbo" Type="OBJECT" />
+    <Grantor>dbo</Grantor>
+  </PermissionStatement>
+  <PermissionStatement Action="GRANT">
+    <Permission>EXECUTE</Permission>
+    <Grantee>aspnet_Membership_ReportingAccess</Grantee>
+    <Object Name="aspnet_UnRegisterSchemaVersion" Schema="dbo" Type="OBJECT" />
+    <Grantor>dbo</Grantor>
+  </PermissionStatement>
+  <PermissionStatement Action="GRANT">
+    <Permission>SELECT</Permission>
+    <Grantee>aspnet_Membership_ReportingAccess</Grantee>
+    <Object Name="vw_aspnet_Applications" Schema="dbo" Type="OBJECT" />
+    <Grantor>dbo</Grantor>
+  </PermissionStatement>
+  <PermissionStatement Action="GRANT">
+    <Permission>SELECT</Permission>
+    <Grantee>aspnet_Membership_ReportingAccess</Grantee>
+    <Object Name="vw_aspnet_Users" Schema="dbo" Type="OBJECT" />
+    <Grantor>dbo</Grantor>
+  </PermissionStatement>
+  <PermissionStatement Action="GRANT">
+    <Permission>EXECUTE</Permission>
+    <Grantee>aspnet_Membership_ReportingAccess</Grantee>
+    <Object Name="aspnet_Membership_GetUserByName" Schema="dbo" Type="OBJECT" />
+    <Grantor>dbo</Grantor>
+  </PermissionStatement>
+  <PermissionStatement Action="GRANT">
+    <Permission>EXECUTE</Permission>
+    <Grantee>aspnet_Membership_ReportingAccess</Grantee>
+    <Object Name="aspnet_Membership_GetUserByUserId" Schema="dbo" Type="OBJECT" />
+    <Grantor>dbo</Grantor>
+  </PermissionStatement>
+  <PermissionStatement Action="GRANT">
+    <Permission>EXECUTE</Permission>
+    <Grantee>aspnet_Membership_ReportingAccess</Grantee>
+    <Object Name="aspnet_Membership_GetUserByEmail" Schema="dbo" Type="OBJECT" />
+    <Grantor>dbo</Grantor>
+  </PermissionStatement>
+  <PermissionStatement Action="GRANT">
+    <Permission>EXECUTE</Permission>
+    <Grantee>aspnet_Membership_ReportingAccess</Grantee>
+    <Object Name="aspnet_Membership_GetAllUsers" Schema="dbo" Type="OBJECT" />
+    <Grantor>dbo</Grantor>
+  </PermissionStatement>
+  <PermissionStatement Action="GRANT">
+    <Permission>EXECUTE</Permission>
+    <Grantee>aspnet_Membership_ReportingAccess</Grantee>
+    <Object Name="aspnet_Membership_GetNumberOfUsersOnline" Schema="dbo" Type="OBJECT" />
+    <Grantor>dbo</Grantor>
+  </PermissionStatement>
+  <PermissionStatement Action="GRANT">
+    <Permission>EXECUTE</Permission>
+    <Grantee>aspnet_Membership_ReportingAccess</Grantee>
+    <Object Name="aspnet_Membership_FindUsersByName" Schema="dbo" Type="OBJECT" />
+    <Grantor>dbo</Grantor>
+  </PermissionStatement>
+  <PermissionStatement Action="GRANT">
+    <Permission>EXECUTE</Permission>
+    <Grantee>aspnet_Membership_ReportingAccess</Grantee>
+    <Object Name="aspnet_Membership_FindUsersByEmail" Schema="dbo" Type="OBJECT" />
+    <Grantor>dbo</Grantor>
+  </PermissionStatement>
+  <PermissionStatement Action="GRANT">
+    <Permission>SELECT</Permission>
+    <Grantee>aspnet_Membership_ReportingAccess</Grantee>
+    <Object Name="vw_aspnet_MembershipUsers" Schema="dbo" Type="OBJECT" />
+    <Grantor>dbo</Grantor>
+  </PermissionStatement>
+  <PermissionStatement Action="GRANT">
+    <Permission>EXECUTE</Permission>
+    <Grantee>aspnet_Profile_FullAccess</Grantee>
+    <Object Name="aspnet_Profile_DeleteProfiles" Schema="dbo" Type="OBJECT" />
+    <Grantor>dbo</Grantor>
+  </PermissionStatement>
+  <PermissionStatement Action="GRANT">
+    <Permission>EXECUTE</Permission>
+    <Grantee>aspnet_Profile_FullAccess</Grantee>
+    <Object Name="aspnet_Profile_DeleteInactiveProfiles" Schema="dbo" Type="OBJECT" />
+    <Grantor>dbo</Grantor>
+  </PermissionStatement>
+  <PermissionStatement Action="GRANT">
+    <Permission>EXECUTE</Permission>
+    <Grantee>aspnet_Profile_BasicAccess</Grantee>
+    <Object Name="aspnet_RegisterSchemaVersion" Schema="dbo" Type="OBJECT" />
+    <Grantor>dbo</Grantor>
+  </PermissionStatement>
+  <PermissionStatement Action="GRANT">
+    <Permission>EXECUTE</Permission>
+    <Grantee>aspnet_Profile_BasicAccess</Grantee>
+    <Object Name="aspnet_CheckSchemaVersion" Schema="dbo" Type="OBJECT" />
+    <Grantor>dbo</Grantor>
+  </PermissionStatement>
+  <PermissionStatement Action="GRANT">
+    <Permission>EXECUTE</Permission>
+    <Grantee>aspnet_Profile_BasicAccess</Grantee>
+    <Object Name="aspnet_UnRegisterSchemaVersion" Schema="dbo" Type="OBJECT" />
+    <Grantor>dbo</Grantor>
+  </PermissionStatement>
+  <PermissionStatement Action="GRANT">
+    <Permission>EXECUTE</Permission>
+    <Grantee>aspnet_Profile_BasicAccess</Grantee>
+    <Object Name="aspnet_Profile_GetProperties" Schema="dbo" Type="OBJECT" />
+    <Grantor>dbo</Grantor>
+  </PermissionStatement>
+  <PermissionStatement Action="GRANT">
+    <Permission>EXECUTE</Permission>
+    <Grantee>aspnet_Profile_BasicAccess</Grantee>
+    <Object Name="aspnet_Profile_SetProperties" Schema="dbo" Type="OBJECT" />
+    <Grantor>dbo</Grantor>
+  </PermissionStatement>
+  <PermissionStatement Action="GRANT">
+    <Permission>EXECUTE</Permission>
+    <Grantee>aspnet_Profile_ReportingAccess</Grantee>
+    <Object Name="aspnet_RegisterSchemaVersion" Schema="dbo" Type="OBJECT" />
+    <Grantor>dbo</Grantor>
+  </PermissionStatement>
+  <PermissionStatement Action="GRANT">
+    <Permission>EXECUTE</Permission>
+    <Grantee>aspnet_Profile_ReportingAccess</Grantee>
+    <Object Name="aspnet_CheckSchemaVersion" Schema="dbo" Type="OBJECT" />
+    <Grantor>dbo</Grantor>
+  </PermissionStatement>
+  <PermissionStatement Action="GRANT">
+    <Permission>EXECUTE</Permission>
+    <Grantee>aspnet_Profile_ReportingAccess</Grantee>
+    <Object Name="aspnet_UnRegisterSchemaVersion" Schema="dbo" Type="OBJECT" />
+    <Grantor>dbo</Grantor>
+  </PermissionStatement>
+  <PermissionStatement Action="GRANT">
+    <Permission>SELECT</Permission>
+    <Grantee>aspnet_Profile_ReportingAccess</Grantee>
+    <Object Name="vw_aspnet_Applications" Schema="dbo" Type="OBJECT" />
+    <Grantor>dbo</Grantor>
+  </PermissionStatement>
+  <PermissionStatement Action="GRANT">
+    <Permission>SELECT</Permission>
+    <Grantee>aspnet_Profile_ReportingAccess</Grantee>
+    <Object Name="vw_aspnet_Users" Schema="dbo" Type="OBJECT" />
+    <Grantor>dbo</Grantor>
+  </PermissionStatement>
+  <PermissionStatement Action="GRANT">
+    <Permission>EXECUTE</Permission>
+    <Grantee>aspnet_Profile_ReportingAccess</Grantee>
+    <Object Name="aspnet_Profile_GetNumberOfInactiveProfiles" Schema="dbo" Type="OBJECT" />
+    <Grantor>dbo</Grantor>
+  </PermissionStatement>
+  <PermissionStatement Action="GRANT">
+    <Permission>EXECUTE</Permission>
+    <Grantee>aspnet_Profile_ReportingAccess</Grantee>
+    <Object Name="aspnet_Profile_GetProfiles" Schema="dbo" Type="OBJECT" />
+    <Grantor>dbo</Grantor>
+  </PermissionStatement>
+  <PermissionStatement Action="GRANT">
+    <Permission>SELECT</Permission>
+    <Grantee>aspnet_Profile_ReportingAccess</Grantee>
+    <Object Name="vw_aspnet_Profiles" Schema="dbo" Type="OBJECT" />
+    <Grantor>dbo</Grantor>
+  </PermissionStatement>
+  <PermissionStatement Action="GRANT">
+    <Permission>EXECUTE</Permission>
+    <Grantee>aspnet_Roles_FullAccess</Grantee>
+    <Object Name="aspnet_Roles_CreateRole" Schema="dbo" Type="OBJECT" />
+    <Grantor>dbo</Grantor>
+  </PermissionStatement>
+  <PermissionStatement Action="GRANT">
+    <Permission>EXECUTE</Permission>
+    <Grantee>aspnet_Roles_FullAccess</Grantee>
+    <Object Name="aspnet_Roles_DeleteRole" Schema="dbo" Type="OBJECT" />
+    <Grantor>dbo</Grantor>
+  </PermissionStatement>
+  <PermissionStatement Action="GRANT">
+    <Permission>EXECUTE</Permission>
+    <Grantee>aspnet_Roles_FullAccess</Grantee>
+    <Object Name="aspnet_UsersInRoles_AddUsersToRoles" Schema="dbo" Type="OBJECT" />
+    <Grantor>dbo</Grantor>
+  </PermissionStatement>
+  <PermissionStatement Action="GRANT">
+    <Permission>EXECUTE</Permission>
+    <Grantee>aspnet_Roles_FullAccess</Grantee>
+    <Object Name="aspnet_UsersInRoles_RemoveUsersFromRoles" Schema="dbo" Type="OBJECT" />
+    <Grantor>dbo</Grantor>
+  </PermissionStatement>
+  <PermissionStatement Action="GRANT">
+    <Permission>EXECUTE</Permission>
+    <Grantee>aspnet_Roles_BasicAccess</Grantee>
+    <Object Name="aspnet_RegisterSchemaVersion" Schema="dbo" Type="OBJECT" />
+    <Grantor>dbo</Grantor>
+  </PermissionStatement>
+  <PermissionStatement Action="GRANT">
+    <Permission>EXECUTE</Permission>
+    <Grantee>aspnet_Roles_BasicAccess</Grantee>
+    <Object Name="aspnet_CheckSchemaVersion" Schema="dbo" Type="OBJECT" />
+    <Grantor>dbo</Grantor>
+  </PermissionStatement>
+  <PermissionStatement Action="GRANT">
+    <Permission>EXECUTE</Permission>
+    <Grantee>aspnet_Roles_BasicAccess</Grantee>
+    <Object Name="aspnet_UnRegisterSchemaVersion" Schema="dbo" Type="OBJECT" />
+    <Grantor>dbo</Grantor>
+  </PermissionStatement>
+  <PermissionStatement Action="GRANT">
+    <Permission>EXECUTE</Permission>
+    <Grantee>aspnet_Roles_BasicAccess</Grantee>
+    <Object Name="aspnet_UsersInRoles_IsUserInRole" Schema="dbo" Type="OBJECT" />
+    <Grantor>dbo</Grantor>
+  </PermissionStatement>
+  <PermissionStatement Action="GRANT">
+    <Permission>EXECUTE</Permission>
+    <Grantee>aspnet_Roles_BasicAccess</Grantee>
+    <Object Name="aspnet_UsersInRoles_GetRolesForUser" Schema="dbo" Type="OBJECT" />
+    <Grantor>dbo</Grantor>
+  </PermissionStatement>
+  <PermissionStatement Action="GRANT">
+    <Permission>EXECUTE</Permission>
+    <Grantee>aspnet_Roles_ReportingAccess</Grantee>
+    <Object Name="aspnet_RegisterSchemaVersion" Schema="dbo" Type="OBJECT" />
+    <Grantor>dbo</Grantor>
+  </PermissionStatement>
+  <PermissionStatement Action="GRANT">
+    <Permission>EXECUTE</Permission>
+    <Grantee>aspnet_Roles_ReportingAccess</Grantee>
+    <Object Name="aspnet_CheckSchemaVersion" Schema="dbo" Type="OBJECT" />
+    <Grantor>dbo</Grantor>
+  </PermissionStatement>
+  <PermissionStatement Action="GRANT">
+    <Permission>EXECUTE</Permission>
+    <Grantee>aspnet_Roles_ReportingAccess</Grantee>
+    <Object Name="aspnet_UnRegisterSchemaVersion" Schema="dbo" Type="OBJECT" />
+    <Grantor>dbo</Grantor>
+  </PermissionStatement>
+  <PermissionStatement Action="GRANT">
+    <Permission>SELECT</Permission>
+    <Grantee>aspnet_Roles_ReportingAccess</Grantee>
+    <Object Name="vw_aspnet_Applications" Schema="dbo" Type="OBJECT" />
+    <Grantor>dbo</Grantor>
+  </PermissionStatement>
+  <PermissionStatement Action="GRANT">
+    <Permission>SELECT</Permission>
+    <Grantee>aspnet_Roles_ReportingAccess</Grantee>
+    <Object Name="vw_aspnet_Users" Schema="dbo" Type="OBJECT" />
+    <Grantor>dbo</Grantor>
+  </PermissionStatement>
+  <PermissionStatement Action="GRANT">
+    <Permission>EXECUTE</Permission>
+    <Grantee>aspnet_Roles_ReportingAccess</Grantee>
+    <Object Name="aspnet_UsersInRoles_IsUserInRole" Schema="dbo" Type="OBJECT" />
+    <Grantor>dbo</Grantor>
+  </PermissionStatement>
+  <PermissionStatement Action="GRANT">
+    <Permission>EXECUTE</Permission>
+    <Grantee>aspnet_Roles_ReportingAccess</Grantee>
+    <Object Name="aspnet_UsersInRoles_GetRolesForUser" Schema="dbo" Type="OBJECT" />
+    <Grantor>dbo</Grantor>
+  </PermissionStatement>
+  <PermissionStatement Action="GRANT">
+    <Permission>EXECUTE</Permission>
+    <Grantee>aspnet_Roles_ReportingAccess</Grantee>
+    <Object Name="aspnet_Roles_RoleExists" Schema="dbo" Type="OBJECT" />
+    <Grantor>dbo</Grantor>
+  </PermissionStatement>
+  <PermissionStatement Action="GRANT">
+    <Permission>EXECUTE</Permission>
+    <Grantee>aspnet_Roles_ReportingAccess</Grantee>
+    <Object Name="aspnet_UsersInRoles_GetUsersInRoles" Schema="dbo" Type="OBJECT" />
+    <Grantor>dbo</Grantor>
+  </PermissionStatement>
+  <PermissionStatement Action="GRANT">
+    <Permission>EXECUTE</Permission>
+    <Grantee>aspnet_Roles_ReportingAccess</Grantee>
+    <Object Name="aspnet_UsersInRoles_FindUsersInRole" Schema="dbo" Type="OBJECT" />
+    <Grantor>dbo</Grantor>
+  </PermissionStatement>
+  <PermissionStatement Action="GRANT">
+    <Permission>EXECUTE</Permission>
+    <Grantee>aspnet_Roles_ReportingAccess</Grantee>
+    <Object Name="aspnet_Roles_GetAllRoles" Schema="dbo" Type="OBJECT" />
+    <Grantor>dbo</Grantor>
+  </PermissionStatement>
+  <PermissionStatement Action="GRANT">
+    <Permission>SELECT</Permission>
+    <Grantee>aspnet_Roles_ReportingAccess</Grantee>
+    <Object Name="vw_aspnet_Roles" Schema="dbo" Type="OBJECT" />
+    <Grantor>dbo</Grantor>
+  </PermissionStatement>
+  <PermissionStatement Action="GRANT">
+    <Permission>SELECT</Permission>
+    <Grantee>aspnet_Roles_ReportingAccess</Grantee>
+    <Object Name="vw_aspnet_UsersInRoles" Schema="dbo" Type="OBJECT" />
+    <Grantor>dbo</Grantor>
+  </PermissionStatement>
+  <PermissionStatement Action="GRANT">
+    <Permission>EXECUTE</Permission>
+    <Grantee>aspnet_Personalization_FullAccess</Grantee>
+    <Object Name="aspnet_PersonalizationAdministration_DeleteAllState" Schema="dbo" Type="OBJECT" />
+    <Grantor>dbo</Grantor>
+  </PermissionStatement>
+  <PermissionStatement Action="GRANT">
+    <Permission>EXECUTE</Permission>
+    <Grantee>aspnet_Personalization_FullAccess</Grantee>
+    <Object Name="aspnet_PersonalizationAdministration_ResetSharedState" Schema="dbo" Type="OBJECT" />
+    <Grantor>dbo</Grantor>
+  </PermissionStatement>
+  <PermissionStatement Action="GRANT">
+    <Permission>EXECUTE</Permission>
+    <Grantee>aspnet_Personalization_FullAccess</Grantee>
+    <Object Name="aspnet_PersonalizationAdministration_ResetUserState" Schema="dbo" Type="OBJECT" />
+    <Grantor>dbo</Grantor>
+  </PermissionStatement>
+  <PermissionStatement Action="GRANT">
+    <Permission>EXECUTE</Permission>
+    <Grantee>aspnet_Personalization_BasicAccess</Grantee>
+    <Object Name="aspnet_RegisterSchemaVersion" Schema="dbo" Type="OBJECT" />
+    <Grantor>dbo</Grantor>
+  </PermissionStatement>
+  <PermissionStatement Action="GRANT">
+    <Permission>EXECUTE</Permission>
+    <Grantee>aspnet_Personalization_BasicAccess</Grantee>
+    <Object Name="aspnet_CheckSchemaVersion" Schema="dbo" Type="OBJECT" />
+    <Grantor>dbo</Grantor>
+  </PermissionStatement>
+  <PermissionStatement Action="GRANT">
+    <Permission>EXECUTE</Permission>
+    <Grantee>aspnet_Personalization_BasicAccess</Grantee>
+    <Object Name="aspnet_UnRegisterSchemaVersion" Schema="dbo" Type="OBJECT" />
+    <Grantor>dbo</Grantor>
+  </PermissionStatement>
+  <PermissionStatement Action="GRANT">
+    <Permission>EXECUTE</Permission>
+    <Grantee>aspnet_Personalization_BasicAccess</Grantee>
+    <Object Name="aspnet_Personalization_GetApplicationId" Schema="dbo" Type="OBJECT" />
+    <Grantor>dbo</Grantor>
+  </PermissionStatement>
+  <PermissionStatement Action="GRANT">
+    <Permission>EXECUTE</Permission>
+    <Grantee>aspnet_Personalization_BasicAccess</Grantee>
+    <Object Name="aspnet_Paths_CreatePath" Schema="dbo" Type="OBJECT" />
+    <Grantor>dbo</Grantor>
+  </PermissionStatement>
+  <PermissionStatement Action="GRANT">
+    <Permission>EXECUTE</Permission>
+    <Grantee>aspnet_Personalization_BasicAccess</Grantee>
+    <Object Name="aspnet_PersonalizationAllUsers_GetPageSettings" Schema="dbo" Type="OBJECT" />
+    <Grantor>dbo</Grantor>
+  </PermissionStatement>
+  <PermissionStatement Action="GRANT">
+    <Permission>EXECUTE</Permission>
+    <Grantee>aspnet_Personalization_BasicAccess</Grantee>
+    <Object Name="aspnet_PersonalizationAllUsers_ResetPageSettings" Schema="dbo" Type="OBJECT" />
+    <Grantor>dbo</Grantor>
+  </PermissionStatement>
+  <PermissionStatement Action="GRANT">
+    <Permission>EXECUTE</Permission>
+    <Grantee>aspnet_Personalization_BasicAccess</Grantee>
+    <Object Name="aspnet_PersonalizationAllUsers_SetPageSettings" Schema="dbo" Type="OBJECT" />
+    <Grantor>dbo</Grantor>
+  </PermissionStatement>
+  <PermissionStatement Action="GRANT">
+    <Permission>EXECUTE</Permission>
+    <Grantee>aspnet_Personalization_BasicAccess</Grantee>
+    <Object Name="aspnet_PersonalizationPerUser_GetPageSettings" Schema="dbo" Type="OBJECT" />
+    <Grantor>dbo</Grantor>
+  </PermissionStatement>
+  <PermissionStatement Action="GRANT">
+    <Permission>EXECUTE</Permission>
+    <Grantee>aspnet_Personalization_BasicAccess</Grantee>
+    <Object Name="aspnet_PersonalizationPerUser_ResetPageSettings" Schema="dbo" Type="OBJECT" />
+    <Grantor>dbo</Grantor>
+  </PermissionStatement>
+  <PermissionStatement Action="GRANT">
+    <Permission>EXECUTE</Permission>
+    <Grantee>aspnet_Personalization_BasicAccess</Grantee>
+    <Object Name="aspnet_PersonalizationPerUser_SetPageSettings" Schema="dbo" Type="OBJECT" />
+    <Grantor>dbo</Grantor>
+  </PermissionStatement>
+  <PermissionStatement Action="GRANT">
+    <Permission>EXECUTE</Permission>
+    <Grantee>aspnet_Personalization_ReportingAccess</Grantee>
+    <Object Name="aspnet_RegisterSchemaVersion" Schema="dbo" Type="OBJECT" />
+    <Grantor>dbo</Grantor>
+  </PermissionStatement>
+  <PermissionStatement Action="GRANT">
+    <Permission>EXECUTE</Permission>
+    <Grantee>aspnet_Personalization_ReportingAccess</Grantee>
+    <Object Name="aspnet_CheckSchemaVersion" Schema="dbo" Type="OBJECT" />
+    <Grantor>dbo</Grantor>
+  </PermissionStatement>
+  <PermissionStatement Action="GRANT">
+    <Permission>EXECUTE</Permission>
+    <Grantee>aspnet_Personalization_ReportingAccess</Grantee>
+    <Object Name="aspnet_UnRegisterSchemaVersion" Schema="dbo" Type="OBJECT" />
+    <Grantor>dbo</Grantor>
+  </PermissionStatement>
+  <PermissionStatement Action="GRANT">
+    <Permission>SELECT</Permission>
+    <Grantee>aspnet_Personalization_ReportingAccess</Grantee>
+    <Object Name="vw_aspnet_Applications" Schema="dbo" Type="OBJECT" />
+    <Grantor>dbo</Grantor>
+  </PermissionStatement>
+  <PermissionStatement Action="GRANT">
+    <Permission>SELECT</Permission>
+    <Grantee>aspnet_Personalization_ReportingAccess</Grantee>
+    <Object Name="vw_aspnet_Users" Schema="dbo" Type="OBJECT" />
+    <Grantor>dbo</Grantor>
+  </PermissionStatement>
+  <PermissionStatement Action="GRANT">
+    <Permission>EXECUTE</Permission>
+    <Grantee>aspnet_Personalization_ReportingAccess</Grantee>
+    <Object Name="aspnet_PersonalizationAdministration_FindState" Schema="dbo" Type="OBJECT" />
+    <Grantor>dbo</Grantor>
+  </PermissionStatement>
+  <PermissionStatement Action="GRANT">
+    <Permission>EXECUTE</Permission>
+    <Grantee>aspnet_Personalization_ReportingAccess</Grantee>
+    <Object Name="aspnet_PersonalizationAdministration_GetCountOfState" Schema="dbo" Type="OBJECT" />
+    <Grantor>dbo</Grantor>
+  </PermissionStatement>
+  <PermissionStatement Action="GRANT">
+    <Permission>SELECT</Permission>
+    <Grantee>aspnet_Personalization_ReportingAccess</Grantee>
+    <Object Name="vw_aspnet_WebPartState_Paths" Schema="dbo" Type="OBJECT" />
+    <Grantor>dbo</Grantor>
+  </PermissionStatement>
+  <PermissionStatement Action="GRANT">
+    <Permission>SELECT</Permission>
+    <Grantee>aspnet_Personalization_ReportingAccess</Grantee>
+    <Object Name="vw_aspnet_WebPartState_Shared" Schema="dbo" Type="OBJECT" />
+    <Grantor>dbo</Grantor>
+  </PermissionStatement>
+  <PermissionStatement Action="GRANT">
+    <Permission>SELECT</Permission>
+    <Grantee>aspnet_Personalization_ReportingAccess</Grantee>
+    <Object Name="vw_aspnet_WebPartState_User" Schema="dbo" Type="OBJECT" />
+    <Grantor>dbo</Grantor>
+  </PermissionStatement>
+  <PermissionStatement Action="GRANT">
+    <Permission>EXECUTE</Permission>
+    <Grantee>aspnet_WebEvent_FullAccess</Grantee>
+    <Object Name="aspnet_RegisterSchemaVersion" Schema="dbo" Type="OBJECT" />
+    <Grantor>dbo</Grantor>
+  </PermissionStatement>
+  <PermissionStatement Action="GRANT">
+    <Permission>EXECUTE</Permission>
+    <Grantee>aspnet_WebEvent_FullAccess</Grantee>
+    <Object Name="aspnet_CheckSchemaVersion" Schema="dbo" Type="OBJECT" />
+    <Grantor>dbo</Grantor>
+  </PermissionStatement>
+  <PermissionStatement Action="GRANT">
+    <Permission>EXECUTE</Permission>
+    <Grantee>aspnet_WebEvent_FullAccess</Grantee>
+    <Object Name="aspnet_UnRegisterSchemaVersion" Schema="dbo" Type="OBJECT" />
+    <Grantor>dbo</Grantor>
+  </PermissionStatement>
+  <PermissionStatement Action="GRANT">
+    <Permission>EXECUTE</Permission>
+    <Grantee>aspnet_WebEvent_FullAccess</Grantee>
+    <Object Name="aspnet_WebEvent_LogEvent" Schema="dbo" Type="OBJECT" />
+    <Grantor>dbo</Grantor>
+  </PermissionStatement>
 </Permissions>
