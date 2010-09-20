@@ -1,10 +1,9 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/Site.Master" Inherits="System.Web.Mvc.ViewPage<WebApp.ViewModels.ArticleDetailsModel>" %>
+<%@ Import Namespace="Commons" %>
 
-<asp:Content ID="Content1" ContentPlaceHolderID="TitleContent" runat="server">
-	Show
-</asp:Content>
+<asp:Content ContentPlaceHolderID="TitleContent" runat="server">NaN - Articles</asp:Content>
 
-<asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
+<asp:Content ContentPlaceHolderID="MainContent" runat="server">
 
     <h2><%: Model.Title %></h2>
 
@@ -14,9 +13,21 @@
 
     <%: Model.Body %>
 
+    <hr />
+
     <p>
         <%: Html.ActionLink("Back to article list", "Index") %>
     </p>
+
+    <h3>Voice your opinion on this article</h3>
+
+    <% using (Html.BeginForm("Grade", "Article")) { %>
+        <% for (int grade = Constants.MinGradeValue; grade <= Constants.MaxGradeValue; ++grade) { %>
+            <%= Html.RadioButton("gradeValue", grade, new {id = "gradeValue" + grade}) %>
+            <label for="gradeValue<%= grade %>"><%= grade %></label>
+        <% } %>
+        <input type="submit" value="Submit grade" />
+    <% } %>
 
 </asp:Content>
 
