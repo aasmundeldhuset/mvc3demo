@@ -31,5 +31,26 @@ namespace Tests.BusinessLogic
             Assert.That(grade.GradeValue, Is.EqualTo(4));
             mockRepo.Verify(r => r.SaveChanges());
         }
+
+        [Test]
+        public void GradeArticle_ShouldUpdateOldGrade_WhenTheUserHasAlreadyGradedTheArticle()
+        {
+            var article = new Article {Id = 20};
+            var currentUser = new User {UserName = "asmunde"};
+            new Grade {Article = article, User = currentUser, GradeValue = 4};
+            var mockRepo = new Mock<IRepository>();
+            mockRepo.Setup(r => r.Get<Article>(20)).Returns(article);
+            mockRepo.Setup(r => r.GetWhere<User>(It.IsAny<Expression<Func<User, bool>>>())).Returns(new[] {currentUser}.AsQueryable());
+            var logic = new GradeLogic(mockRepo.Object);
+
+            logic.GradeArticle(20, "asmunde", 2);
+
+            Assert.That(article.Grades.Count, Is.EqualTo(1));
+            Assert.That(currentUser.Grades.Count, Is.EqualTo(1));
+            var grade = article.Grades.Single();
+            Assert.That(grade, Is.SameAs(currentUser.Grades.Single()));
+            Assert.That(grade.GradeValue, Is.EqualTo(2));
+            mockRepo.Verify(r => r.SaveChanges());
+        }
     }
 }
