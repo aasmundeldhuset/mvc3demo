@@ -52,7 +52,7 @@
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="Domain" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
-        <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="EntityContainer" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Users" EntityType="Domain.User" />
           <EntitySet Name="Articles" EntityType="Domain.Article" />
           <AssociationSet Name="FK__Article__AuthorId__aspnet_Users__UserId" Association="Domain.FK__Article__AuthorId__aspnet_Users__UserId">
@@ -102,7 +102,7 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="DomainStoreContainer" CdmEntityContainer="Entities">
+        <EntityContainerMapping StorageEntityContainer="DomainStoreContainer" CdmEntityContainer="EntityContainer">
           <EntitySetMapping Name="Users"><EntityTypeMapping TypeName="Domain.User"><MappingFragment StoreEntitySet="aspnet_Users">
             <ScalarProperty Name="ApplicationId" ColumnName="ApplicationId" />
             <ScalarProperty Name="UserId" ColumnName="UserId" />

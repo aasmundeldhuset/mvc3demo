@@ -29,32 +29,32 @@ namespace Domain
     /// <summary>
     /// No Metadata Documentation available.
     /// </summary>
-    public partial class Entities : ObjectContext
+    public partial class EntityContainer : ObjectContext
     {
         #region Constructors
     
         /// <summary>
-        /// Initializes a new Entities object using the connection string found in the 'Entities' section of the application configuration file.
+        /// Initializes a new EntityContainer object using the connection string found in the 'EntityContainer' section of the application configuration file.
         /// </summary>
-        public Entities() : base("name=Entities", "Entities")
+        public EntityContainer() : base("name=EntityContainer", "EntityContainer")
         {
             this.ContextOptions.LazyLoadingEnabled = true;
             OnContextCreated();
         }
     
         /// <summary>
-        /// Initialize a new Entities object.
+        /// Initialize a new EntityContainer object.
         /// </summary>
-        public Entities(string connectionString) : base(connectionString, "Entities")
+        public EntityContainer(string connectionString) : base(connectionString, "EntityContainer")
         {
             this.ContextOptions.LazyLoadingEnabled = true;
             OnContextCreated();
         }
     
         /// <summary>
-        /// Initialize a new Entities object.
+        /// Initialize a new EntityContainer object.
         /// </summary>
-        public Entities(EntityConnection connection) : base(connection, "Entities")
+        public EntityContainer(EntityConnection connection) : base(connection, "EntityContainer")
         {
             this.ContextOptions.LazyLoadingEnabled = true;
             OnContextCreated();
