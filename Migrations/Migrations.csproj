@@ -50,6 +50,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ExternallyCallableMigration.cs" />
+    <Compile Include="Migrations\M002_AddingGradeModel.cs" />
     <Compile Include="Migrations\M001_AddingArticleModel.cs" />
     <Compile Include="MigrationUtilities.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
