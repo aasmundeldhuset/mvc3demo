@@ -6,7 +6,7 @@ namespace BusinessLogic
     {
         public override void Load()
         {
-            Bind<GradeLogic>().To<GradeLogic>().InRequestScope();
+            Bind<GradeLogic>().ToSelf().InRequestScope();
         }
     }
 }
