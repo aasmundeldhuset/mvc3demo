@@ -36,6 +36,7 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Data.Entity" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
@@ -66,15 +67,18 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\ArticleController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModels\ArticleViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Global.asax" />
+    <Content Include="Views\Article\Index.aspx" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -115,6 +119,10 @@
     <ProjectReference Include="..\Commons\Commons.csproj">
       <Project>{C1F0235E-79AB-4C01-966F-63FBE951DCD5}</Project>
       <Name>Commons</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Domain\Domain.csproj">
+      <Project>{AACDF4A3-75B7-4FCF-83D4-3CEFB650D01B}</Project>
+      <Name>Domain</Name>
     </ProjectReference>
     <ProjectReference Include="..\Migrations\Migrations.csproj">
       <Project>{00F93A94-E75D-4F76-BBDF-662A8F2116BF}</Project>
