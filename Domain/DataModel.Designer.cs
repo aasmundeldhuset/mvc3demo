@@ -19,6 +19,8 @@ using System.Runtime.Serialization;
 #region EDM Relationship Metadata
 
 [assembly: EdmRelationshipAttribute("Domain", "FK__Article__AuthorId__aspnet_Users__UserId", "User", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Domain.User), "Article", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Domain.Article), true)]
+[assembly: EdmRelationshipAttribute("Domain", "FK__Grade__ArticleId__Article__Id", "Article", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Domain.Article), "Grade", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Domain.Grade), true)]
+[assembly: EdmRelationshipAttribute("Domain", "FK__Grade__UserId__aspnet_Users__UserId", "User", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Domain.User), "Grade", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Domain.Grade), true)]
 
 #endregion
 
@@ -101,6 +103,22 @@ namespace Domain
             }
         }
         private ObjectSet<Article> _Articles;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<Grade> Grades
+        {
+            get
+            {
+                if ((_Grades == null))
+                {
+                    _Grades = base.CreateObjectSet<Grade>("Grades");
+                }
+                return _Grades;
+            }
+        }
+        private ObjectSet<Grade> _Grades;
 
         #endregion
         #region AddTo Methods
@@ -119,6 +137,14 @@ namespace Domain
         public void AddToArticles(Article article)
         {
             base.AddObject("Articles", article);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the Grades EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToGrades(Grade grade)
+        {
+            base.AddObject("Grades", grade);
         }
 
         #endregion
@@ -348,6 +374,266 @@ namespace Domain
                 if ((value != null))
                 {
                     ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<User>("Domain.FK__Article__AuthorId__aspnet_Users__UserId", "User", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("Domain", "FK__Grade__ArticleId__Article__Id", "Grade")]
+        public EntityCollection<Grade> Grades
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Grade>("Domain.FK__Grade__ArticleId__Article__Id", "Grade");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Grade>("Domain.FK__Grade__ArticleId__Article__Id", "Grade", value);
+                }
+            }
+        }
+
+        #endregion
+    }
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="Domain", Name="Grade")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class Grade : EntityObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new Grade object.
+        /// </summary>
+        /// <param name="id">Initial value of the Id property.</param>
+        /// <param name="articleId">Initial value of the ArticleId property.</param>
+        /// <param name="userId">Initial value of the UserId property.</param>
+        /// <param name="gradeValue">Initial value of the GradeValue property.</param>
+        /// <param name="version">Initial value of the Version property.</param>
+        public static Grade CreateGrade(global::System.Int32 id, global::System.Int32 articleId, global::System.Guid userId, global::System.Int32 gradeValue, global::System.Byte[] version)
+        {
+            Grade grade = new Grade();
+            grade.Id = id;
+            grade.ArticleId = articleId;
+            grade.UserId = userId;
+            grade.GradeValue = gradeValue;
+            grade.Version = version;
+            return grade;
+        }
+
+        #endregion
+        #region Primitive Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 Id
+        {
+            get
+            {
+                return _Id;
+            }
+            set
+            {
+                if (_Id != value)
+                {
+                    OnIdChanging(value);
+                    ReportPropertyChanging("Id");
+                    _Id = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("Id");
+                    OnIdChanged();
+                }
+            }
+        }
+        private global::System.Int32 _Id;
+        partial void OnIdChanging(global::System.Int32 value);
+        partial void OnIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 ArticleId
+        {
+            get
+            {
+                return _ArticleId;
+            }
+            set
+            {
+                OnArticleIdChanging(value);
+                ReportPropertyChanging("ArticleId");
+                _ArticleId = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("ArticleId");
+                OnArticleIdChanged();
+            }
+        }
+        private global::System.Int32 _ArticleId;
+        partial void OnArticleIdChanging(global::System.Int32 value);
+        partial void OnArticleIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Guid UserId
+        {
+            get
+            {
+                return _UserId;
+            }
+            set
+            {
+                OnUserIdChanging(value);
+                ReportPropertyChanging("UserId");
+                _UserId = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("UserId");
+                OnUserIdChanged();
+            }
+        }
+        private global::System.Guid _UserId;
+        partial void OnUserIdChanging(global::System.Guid value);
+        partial void OnUserIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 GradeValue
+        {
+            get
+            {
+                return _GradeValue;
+            }
+            set
+            {
+                OnGradeValueChanging(value);
+                ReportPropertyChanging("GradeValue");
+                _GradeValue = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("GradeValue");
+                OnGradeValueChanged();
+            }
+        }
+        private global::System.Int32 _GradeValue;
+        partial void OnGradeValueChanging(global::System.Int32 value);
+        partial void OnGradeValueChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Byte[] Version
+        {
+            get
+            {
+                return StructuralObject.GetValidValue(_Version);
+            }
+            set
+            {
+                OnVersionChanging(value);
+                ReportPropertyChanging("Version");
+                _Version = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("Version");
+                OnVersionChanged();
+            }
+        }
+        private global::System.Byte[] _Version;
+        partial void OnVersionChanging(global::System.Byte[] value);
+        partial void OnVersionChanged();
+
+        #endregion
+    
+        #region Navigation Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("Domain", "FK__Grade__ArticleId__Article__Id", "Article")]
+        public Article Article
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Article>("Domain.FK__Grade__ArticleId__Article__Id", "Article").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Article>("Domain.FK__Grade__ArticleId__Article__Id", "Article").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<Article> ArticleReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Article>("Domain.FK__Grade__ArticleId__Article__Id", "Article");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Article>("Domain.FK__Grade__ArticleId__Article__Id", "Article", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("Domain", "FK__Grade__UserId__aspnet_Users__UserId", "User")]
+        public User User
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<User>("Domain.FK__Grade__UserId__aspnet_Users__UserId", "User").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<User>("Domain.FK__Grade__UserId__aspnet_Users__UserId", "User").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<User> UserReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<User>("Domain.FK__Grade__UserId__aspnet_Users__UserId", "User");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<User>("Domain.FK__Grade__UserId__aspnet_Users__UserId", "User", value);
                 }
             }
         }
@@ -582,6 +868,28 @@ namespace Domain
                 if ((value != null))
                 {
                     ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Article>("Domain.FK__Article__AuthorId__aspnet_Users__UserId", "Article", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("Domain", "FK__Grade__UserId__aspnet_Users__UserId", "Grade")]
+        public EntityCollection<Grade> Grades
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Grade>("Domain.FK__Grade__UserId__aspnet_Users__UserId", "Grade");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Grade>("Domain.FK__Grade__UserId__aspnet_Users__UserId", "Grade", value);
                 }
             }
         }

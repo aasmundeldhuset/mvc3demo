@@ -8,9 +8,18 @@
         <EntityContainer Name="DomainStoreContainer">
           <EntitySet Name="Article" EntityType="Domain.Store.Article" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="aspnet_Users" EntityType="Domain.Store.aspnet_Users" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Grade" EntityType="Domain.Store.Grade" store:Type="Tables" Schema="dbo" />
           <AssociationSet Name="FK__Article__AuthorId__aspnet_Users__UserId" Association="Domain.Store.FK__Article__AuthorId__aspnet_Users__UserId">
             <End Role="aspnet_Users" EntitySet="aspnet_Users" />
             <End Role="Article" EntitySet="Article" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Grade__ArticleId__Article__Id" Association="Domain.Store.FK__Grade__ArticleId__Article__Id">
+            <End Role="Article" EntitySet="Article" />
+            <End Role="Grade" EntitySet="Grade" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Grade__UserId__aspnet_Users__UserId" Association="Domain.Store.FK__Grade__UserId__aspnet_Users__UserId">
+            <End Role="aspnet_Users" EntitySet="aspnet_Users" />
+            <End Role="Grade" EntitySet="Grade" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="Article">
@@ -36,6 +45,16 @@
           <Property Name="IsAnonymous" Type="bit" Nullable="false" />
           <Property Name="LastActivityDate" Type="datetime" Nullable="false" />
         </EntityType>
+        <EntityType Name="Grade">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="ArticleId" Type="int" Nullable="false" />
+          <Property Name="UserId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="GradeValue" Type="int" Nullable="false" />
+          <Property Name="Version" Type="timestamp" Nullable="false" StoreGeneratedPattern="Computed" />
+        </EntityType>
         <Association Name="FK__Article__AuthorId__aspnet_Users__UserId">
           <End Role="aspnet_Users" Type="Domain.Store.aspnet_Users" Multiplicity="1" />
           <End Role="Article" Type="Domain.Store.Article" Multiplicity="*" />
@@ -45,6 +64,30 @@
             </Principal>
             <Dependent Role="Article">
               <PropertyRef Name="AuthorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Grade__ArticleId__Article__Id">
+          <End Role="Article" Type="Domain.Store.Article" Multiplicity="1" />
+          <End Role="Grade" Type="Domain.Store.Grade" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Article">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Grade">
+              <PropertyRef Name="ArticleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Grade__UserId__aspnet_Users__UserId">
+          <End Role="aspnet_Users" Type="Domain.Store.aspnet_Users" Multiplicity="1" />
+          <End Role="Grade" Type="Domain.Store.Grade" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="aspnet_Users">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Grade">
+              <PropertyRef Name="UserId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -59,6 +102,15 @@
             <End Role="User" EntitySet="Users" />
             <End Role="Article" EntitySet="Articles" />
           </AssociationSet>
+          <EntitySet Name="Grades" EntityType="Domain.Grade" />
+          <AssociationSet Name="FK__Grade__ArticleId__Article__Id" Association="Domain.FK__Grade__ArticleId__Article__Id">
+            <End Role="Article" EntitySet="Articles" />
+            <End Role="Grade" EntitySet="Grades" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Grade__UserId__aspnet_Users__UserId" Association="Domain.FK__Grade__UserId__aspnet_Users__UserId">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Grade" EntitySet="Grades" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="User">
           <Key>
@@ -72,6 +124,7 @@
           <Property Name="IsAnonymous" Type="Boolean" Nullable="false" />
           <Property Name="LastActivityDate" Type="DateTime" Nullable="false" />
           <NavigationProperty Name="Articles" Relationship="Domain.FK__Article__AuthorId__aspnet_Users__UserId" FromRole="User" ToRole="Article" />
+          <NavigationProperty Name="Grades" Relationship="Domain.FK__Grade__UserId__aspnet_Users__UserId" FromRole="User" ToRole="Grade" />
         </EntityType>
         <EntityType Name="Article">
           <Key>
@@ -84,6 +137,7 @@
           <Property Type="String" Name="Body" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Type="Binary" Name="Version" Nullable="false" MaxLength="8" FixedLength="true" annotation:StoreGeneratedPattern="Computed" ConcurrencyMode="Fixed" />
           <NavigationProperty Name="Author" Relationship="Domain.FK__Article__AuthorId__aspnet_Users__UserId" FromRole="Article" ToRole="User" />
+          <NavigationProperty Name="Grades" Relationship="Domain.FK__Grade__ArticleId__Article__Id" FromRole="Article" ToRole="Grade" />
         </EntityType>
         <Association Name="FK__Article__AuthorId__aspnet_Users__UserId">
           <End Type="Domain.User" Role="User" Multiplicity="1" />
@@ -94,6 +148,42 @@
             </Principal>
             <Dependent Role="Article">
               <PropertyRef Name="AuthorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Grade">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="ArticleId" Nullable="false" />
+          <Property Type="Guid" Name="UserId" Nullable="false" />
+          <Property Type="Int32" Name="GradeValue" Nullable="false" />
+          <Property Type="Binary" Name="Version" Nullable="false" MaxLength="8" FixedLength="true" annotation:StoreGeneratedPattern="Computed" ConcurrencyMode="Fixed" />
+          <NavigationProperty Name="Article" Relationship="Domain.FK__Grade__ArticleId__Article__Id" FromRole="Grade" ToRole="Article" />
+          <NavigationProperty Name="User" Relationship="Domain.FK__Grade__UserId__aspnet_Users__UserId" FromRole="Grade" ToRole="User" />
+        </EntityType>
+        <Association Name="FK__Grade__ArticleId__Article__Id">
+          <End Type="Domain.Article" Role="Article" Multiplicity="1" />
+          <End Type="Domain.Grade" Role="Grade" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Article">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Grade">
+              <PropertyRef Name="ArticleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Grade__UserId__aspnet_Users__UserId">
+          <End Type="Domain.User" Role="User" Multiplicity="1" />
+          <End Type="Domain.Grade" Role="Grade" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Grade">
+              <PropertyRef Name="UserId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -124,6 +214,17 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Grades">
+            <EntityTypeMapping TypeName="Domain.Grade">
+              <MappingFragment StoreEntitySet="Grade">
+                <ScalarProperty Name="Version" ColumnName="Version" />
+                <ScalarProperty Name="GradeValue" ColumnName="GradeValue" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="ArticleId" ColumnName="ArticleId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
@@ -146,10 +247,19 @@
     <Diagrams>
       <Diagram Name="DataModel">
         <EntityTypeShape EntityType="Domain.User" Width="1.5" PointX="0.75" PointY="0.75" Height="2.085348307291667" IsExpanded="true" />
-        <EntityTypeShape EntityType="Domain.Article" Width="1.5" PointX="3" PointY="0.875" Height="2.0853483072916656" />
+        <EntityTypeShape EntityType="Domain.Article" Width="1.5" PointX="3" PointY="0.75" Height="2.2496956380208331" />
         <AssociationConnector Association="Domain.FK__Article__AuthorId__aspnet_Users__UserId" >
-          <ConnectorPoint PointX="2.25" PointY="1.9176741536458328" />
-          <ConnectorPoint PointX="3" PointY="1.9176741536458328" />
+          <ConnectorPoint PointX="2.25" PointY="1.8748478190104168" />
+          <ConnectorPoint PointX="3" PointY="1.8748478190104168" />
+        </AssociationConnector>
+        <EntityTypeShape EntityType="Domain.Grade" Width="1.5" PointX="1.875" PointY="4.125" Height="2.0853483072916656" />
+        <AssociationConnector Association="Domain.FK__Grade__ArticleId__Article__Id" >
+          <ConnectorPoint PointX="3.1875" PointY="2.9996956380208331" />
+          <ConnectorPoint PointX="3.1875" PointY="4.125" />
+        </AssociationConnector>
+        <AssociationConnector Association="Domain.FK__Grade__UserId__aspnet_Users__UserId" >
+          <ConnectorPoint PointX="2.0625" PointY="3.16404296875" />
+          <ConnectorPoint PointX="2.0625" PointY="4.125" />
         </AssociationConnector>
       </Diagram>
     </Diagrams>
