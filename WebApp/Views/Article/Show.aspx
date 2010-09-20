@@ -7,7 +7,10 @@
 
     <h2><%: Model.Title %></h2>
 
-    <p><strong>Author:</strong> <%: Model.AuthorUserName %></p>
+    <p>
+        <strong>Author:</strong> <%: Model.AuthorUserName %><br />
+        <strong>Grade average:</strong> <%: Model.GradeAverage %>
+    </p>
 
     <p><em><%: Model.Summary %></em></p>
 
@@ -21,7 +24,7 @@
 
     <h3>Voice your opinion on this article</h3>
 
-    <% using (Html.BeginForm("GradeArticle", "Grade")) { %>
+    <% using (Html.BeginForm("GradeArticle", "Grade", new {id = RouteData.Values["id"]})) { %>
         <% for (int grade = Constants.MinGradeValue; grade <= Constants.MaxGradeValue; ++grade) { %>
             <%= Html.RadioButton("gradeValue", grade, new {id = "gradeValue" + grade}) %>
             <label for="gradeValue<%= grade %>"><%= grade %></label>

@@ -9,17 +9,13 @@ using WebApp.ViewModels;
 
 namespace WebApp.Controllers
 {
-    public class GradeController : Controller
+    public class GradeController : BaseController
     {
-        private readonly IRepository _repo;
         private readonly GradeLogic _logic;
-        private readonly IPrincipal _mockUser;
         
-        public GradeController(IRepository repo, GradeLogic logic, IPrincipal mockUser = null)
+        public GradeController(GradeLogic logic)
         {
-            _repo = repo;
             _logic = logic;
-            _mockUser = mockUser;
         }
         
         [HttpPost]
@@ -27,15 +23,6 @@ namespace WebApp.Controllers
         {
             _logic.GradeArticle(id, CurrentUser.Identity.Name, gradeValue);
             return RedirectToAction("Show", "Article", new {id});
-        }
-
-        /// <summary>
-        /// Allows us to inject a mock User object for testing.
-        /// See http://www.hanselman.com/blog/IPrincipalUserModelBinderInASPNETMVCForEasierTesting.aspx for better, but more complex ways of solving it
-        /// </summary>
-        private IPrincipal CurrentUser
-        {
-            get { return _mockUser ?? User; }
         }
     }
 }

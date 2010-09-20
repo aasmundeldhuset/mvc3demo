@@ -7,7 +7,7 @@ using WebApp.ViewModels;
 
 namespace WebApp.Controllers
 {
-    public class ArticleController : Controller
+    public class ArticleController : BaseController
     {
         private readonly IRepository _repo;
 
@@ -27,7 +27,7 @@ namespace WebApp.Controllers
         public ActionResult Show(int id)
         {
             var article = _repo.Get<Article>(id);
-            return View(new ArticleDetailsModel(article));
+            return View(new ArticleDetailsModel(article, CurrentUser.Identity.Name));
         }
 
         public ActionResult Create()
