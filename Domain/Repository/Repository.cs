@@ -10,6 +10,8 @@ namespace Domain.Repository
 {
     public class Repository : IDisposable, IRepository
     {
+        private const string EntityKeyPrefix = "EntityContainer.";
+
         private readonly EntityContainer _container;
         private bool _disposed = false;
 
@@ -72,13 +74,13 @@ namespace Domain.Repository
         public T Get<T>(int id)
             where T : class, IEntityWithKey
         {
-            var entityKey = new EntityKey("Entities." + GetEntitySetName(typeof(T)), "Id", id);
+            var entityKey = new EntityKey(EntityKeyPrefix + GetEntitySetName(typeof(T)), "Id", id);
             return _container.GetObjectByKey(entityKey) as T;
         }
 
         public object Get(Type entity, int id)
         {
-            var entityKey = new EntityKey("Entities." + GetEntitySetName(entity), "Id", id);
+            var entityKey = new EntityKey(EntityKeyPrefix + GetEntitySetName(entity), "Id", id);
             return _container.GetObjectByKey(entityKey);
         }
 
