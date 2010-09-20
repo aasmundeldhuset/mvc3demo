@@ -4,10 +4,26 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="Domain.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+    <Schema Namespace="Domain.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
         <EntityContainer Name="DomainStoreContainer">
+          <EntitySet Name="Article" EntityType="Domain.Store.Article" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="aspnet_Users" EntityType="Domain.Store.aspnet_Users" store:Type="Tables" Schema="dbo" />
+          <AssociationSet Name="FK__Article__AuthorId__aspnet_Users__UserId" Association="Domain.Store.FK__Article__AuthorId__aspnet_Users__UserId">
+            <End Role="aspnet_Users" EntitySet="aspnet_Users" />
+            <End Role="Article" EntitySet="Article" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="Article">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="AuthorId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" Nullable="false" MaxLength="255" />
+          <Property Name="Summary" Type="ntext" Nullable="false" />
+          <Property Name="Body" Type="ntext" Nullable="false" />
+          <Property Name="Version" Type="timestamp" Nullable="false" StoreGeneratedPattern="Computed" />
+        </EntityType>
         <EntityType Name="aspnet_Users">
           <Key>
             <PropertyRef Name="UserId" />
@@ -20,13 +36,29 @@
           <Property Name="IsAnonymous" Type="bit" Nullable="false" />
           <Property Name="LastActivityDate" Type="datetime" Nullable="false" />
         </EntityType>
-      </Schema>
-    </edmx:StorageModels>
+        <Association Name="FK__Article__AuthorId__aspnet_Users__UserId">
+          <End Role="aspnet_Users" Type="Domain.Store.aspnet_Users" Multiplicity="1" />
+          <End Role="Article" Type="Domain.Store.Article" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="aspnet_Users">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Article">
+              <PropertyRef Name="AuthorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="Domain" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
         <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Users" EntityType="Domain.User" />
+          <EntitySet Name="Articles" EntityType="Domain.Article" />
+          <AssociationSet Name="FK__Article__AuthorId__aspnet_Users__UserId" Association="Domain.FK__Article__AuthorId__aspnet_Users__UserId">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Article" EntitySet="Articles" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="User">
           <Key>
@@ -39,7 +71,32 @@
           <Property Name="MobileAlias" Type="String" MaxLength="16" Unicode="true" FixedLength="false" />
           <Property Name="IsAnonymous" Type="Boolean" Nullable="false" />
           <Property Name="LastActivityDate" Type="DateTime" Nullable="false" />
+          <NavigationProperty Name="Articles" Relationship="Domain.FK__Article__AuthorId__aspnet_Users__UserId" FromRole="User" ToRole="Article" />
         </EntityType>
+        <EntityType Name="Article">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Guid" Name="AuthorId" Nullable="false" />
+          <Property Type="String" Name="Title" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Summary" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Body" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="Binary" Name="Version" Nullable="false" MaxLength="8" FixedLength="true" annotation:StoreGeneratedPattern="Computed" />
+          <NavigationProperty Name="Author" Relationship="Domain.FK__Article__AuthorId__aspnet_Users__UserId" FromRole="Article" ToRole="User" />
+        </EntityType>
+        <Association Name="FK__Article__AuthorId__aspnet_Users__UserId">
+          <End Type="Domain.User" Role="User" Multiplicity="1" />
+          <End Type="Domain.Article" Role="Article" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Article">
+              <PropertyRef Name="AuthorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -55,6 +112,18 @@
             <ScalarProperty Name="IsAnonymous" ColumnName="IsAnonymous" />
             <ScalarProperty Name="LastActivityDate" ColumnName="LastActivityDate" />
           </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="Articles">
+            <EntityTypeMapping TypeName="Domain.Article">
+              <MappingFragment StoreEntitySet="Article">
+                <ScalarProperty Name="Version" ColumnName="Version" />
+                <ScalarProperty Name="Body" ColumnName="Body" />
+                <ScalarProperty Name="Summary" ColumnName="Summary" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="AuthorId" ColumnName="AuthorId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
@@ -77,6 +146,11 @@
     <Diagrams>
       <Diagram Name="DataModel">
         <EntityTypeShape EntityType="Domain.User" Width="1.5" PointX="0.75" PointY="0.75" Height="2.085348307291667" IsExpanded="true" />
+        <EntityTypeShape EntityType="Domain.Article" Width="1.5" PointX="3" PointY="0.875" Height="2.0853483072916656" />
+        <AssociationConnector Association="Domain.FK__Article__AuthorId__aspnet_Users__UserId" >
+          <ConnectorPoint PointX="2.25" PointY="1.9176741536458328" />
+          <ConnectorPoint PointX="3" PointY="1.9176741536458328" />
+        </AssociationConnector>
       </Diagram>
     </Diagrams>
   </Designer>

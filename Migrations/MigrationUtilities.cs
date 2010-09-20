@@ -14,6 +14,15 @@ namespace Migrations
                                     "Id");
         }
 
+        public static void AddForeignKey(this ITransformationProvider migration, string foreignTable, string foreignColumn, string primaryTable, string primaryColumn)
+        {
+            migration.AddForeignKey(migration.ForeignKeyName(foreignTable, foreignColumn, primaryTable, primaryColumn),
+                                    foreignTable,
+                                    foreignColumn,
+                                    primaryTable,
+                                    primaryColumn);
+        }
+
         public static string ForeignKeyName(this ITransformationProvider migration, string foreignTable, string primaryTable)
         {
             return string.Format("FK__{0}__{1}Id__{1}__Id", foreignTable, primaryTable);
@@ -22,6 +31,11 @@ namespace Migrations
         public static string ForeignKeyName(this ITransformationProvider migration, string foreignKeyTable, string primaryTable, string foreignColumnName)
         {
             return string.Format("FK__{0}__{2}__{1}__Id", foreignKeyTable, primaryTable, foreignColumnName);
+        }
+
+        public static string ForeignKeyName(this ITransformationProvider migration, string foreignTable, string foreignColumn, string primaryTable, string primaryColumn)
+        {
+            return string.Format("FK__{0}__{1}__{2}__{3}", foreignTable, foreignColumn, primaryTable, primaryColumn);
         }
 
         public static void DropForeignKey(this ITransformationProvider migration, string foreignTable, string primaryTable)
