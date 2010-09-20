@@ -54,6 +54,7 @@
   <ItemGroup>
     <Compile Include="BusinessLogic\GradeLogicTests.cs" />
     <Compile Include="BusinessLogic\Utilities\MiniLanguageFormatterTests.cs" />
+    <Compile Include="Domain\ArticleTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

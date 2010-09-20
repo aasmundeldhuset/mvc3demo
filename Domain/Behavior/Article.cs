@@ -1,10 +1,15 @@
-﻿namespace Domain
+﻿using System.Linq;
+using Commons;
+
+namespace Domain
 {
     public partial class Article
     {
         public decimal GetGradeAverage()
         {
-            return 0;
+            var userGradesAndInitialGrade = Grades.Select(g => g.GradeValue).Concat(new[] {Constants.InitialGradeValue});
+            decimal unroundedAverage = (decimal) userGradesAndInitialGrade.Average();
+            return Utilities.RoundTowardsZeroToTwoDecimals(unroundedAverage);
         }
     }
 }

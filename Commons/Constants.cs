@@ -7,5 +7,6 @@
 
         public const int MinGradeValue = 1;
         public const int MaxGradeValue = 5;
+        public const int InitialGradeValue = 3;
     }
 }
