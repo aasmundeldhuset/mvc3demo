@@ -2,14 +2,17 @@
 using System.Web.Mvc;
 using System.Web.Routing;
 using Commons;
+using Domain;
 using Migrations;
+using Ninject;
+using Ninject.Web.Mvc;
 
 namespace WebApp
 {
     // Note: For instructions on enabling IIS6 or IIS7 classic mode, 
     // visit http://go.microsoft.com/?LinkId=9394801
 
-    public class MvcApplication : System.Web.HttpApplication
+    public class MvcApplication : NinjectHttpApplication
     {
         public static void RegisterRoutes(RouteCollection routes)
         {
@@ -22,11 +25,16 @@ namespace WebApp
             );
         }
 
-        protected void Application_Start()
+        protected override void OnApplicationStarted()
         {
             AreaRegistration.RegisterAllAreas();
             RegisterRoutes(RouteTable.Routes);
             MigrateDatabase();
+        }
+
+        protected override IKernel CreateKernel()
+        {
+            return new StandardKernel(new RepoModule());
         }
 
         private static void MigrateDatabase()

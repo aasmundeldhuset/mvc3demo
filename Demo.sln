@@ -14,6 +14,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "BuildAssets", "BuildAssets"
 		BuildAssets\Migrator.dll = BuildAssets\Migrator.dll
 		BuildAssets\Migrator.Framework.dll = BuildAssets\Migrator.Framework.dll
 		BuildAssets\Migrator.Providers.dll = BuildAssets\Migrator.Providers.dll
+		BuildAssets\Ninject.dll = BuildAssets\Ninject.dll
+		BuildAssets\Ninject.Web.Mvc.dll = BuildAssets\Ninject.Web.Mvc.dll
+		BuildAssets\Ninject.xml = BuildAssets\Ninject.xml
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Commons", "Commons\Commons.csproj", "{C1F0235E-79AB-4C01-966F-63FBE951DCD5}"

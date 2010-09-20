@@ -7,7 +7,7 @@ using System.Linq.Expressions;
 
 namespace Domain.Repository
 {
-    public interface IEtfRepo
+    public interface IRepository
     {
         IObjectSet<T> GetAll<T>() where T : class, IEntityWithKey;
         IQueryable<T> GetAll<T>(string sortColumn, string sortOrder) where T : class, IEntityWithKey;

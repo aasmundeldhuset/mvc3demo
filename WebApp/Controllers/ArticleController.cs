@@ -9,15 +9,19 @@ namespace WebApp.Controllers
 {
     public class ArticleController : Controller
     {
+        private readonly IRepository _repo;
+
+        public ArticleController(IRepository repo)
+        {
+            _repo = repo;
+        }
+
         public ActionResult Index()
         {
-            using (var repo = new Repository())
-            {
-                var articles = from article in repo.GetAll<Article>().ToList()
-                               orderby article.Title
-                               select new ArticleViewModel(article);
-                return View(articles);
-            }
+            var articles = from article in _repo.GetAll<Article>().ToList()
+                           orderby article.Title
+                           select new ArticleViewModel(article);
+            return View(articles);
         }
 
         public ActionResult Show(int id)

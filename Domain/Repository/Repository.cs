@@ -8,7 +8,7 @@ using System.Linq.Expressions;
 
 namespace Domain.Repository
 {
-    public class Repository : IDisposable, IEtfRepo
+    public class Repository : IDisposable, IRepository
     {
         private readonly EntityContainer _container;
         private bool _disposed = false;
