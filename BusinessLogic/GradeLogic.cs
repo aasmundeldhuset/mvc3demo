@@ -9,19 +9,22 @@ namespace BusinessLogic
 {
     public class GradeLogic
     {
-        private IRepository _repo;
+        private readonly IRepository _repo;
 
         public GradeLogic(IRepository repo)
         {
             _repo = repo;
         }
 
-
         public void GradeArticle(int articleId, string currentUserName, int gradeValue)
         {
             var article = _repo.Get<Article>(articleId);
             var user = _repo.GetWhere<User>(u => u.UserName == currentUserName).Single();
-            new Grade {Article = article, User = user, GradeValue = gradeValue};
+            var oldGrade = article.Grades.SingleOrDefault(g => g.User == user);
+            if (oldGrade == null)
+                new Grade {Article = article, User = user, GradeValue = gradeValue};
+            else
+                oldGrade.GradeValue = gradeValue;
             _repo.SaveChanges();
         }
     }
