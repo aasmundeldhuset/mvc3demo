@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/Site.Master" Inherits="System.Web.Mvc.ViewPage<IEnumerable<WebApp.ViewModels.ArticleViewModel>>" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/Site.Master" Inherits="System.Web.Mvc.ViewPage<IEnumerable<WebApp.ViewModels.ArticleListModel>>" %>
 
 <asp:Content ContentPlaceHolderID="TitleContent" runat="server">NaN - Articles</asp:Content>
 
@@ -18,7 +18,7 @@
         <% foreach (var article in Model) { %>
     
             <tr>
-                <td><%: Html.ActionLink(article.Title, "Index", new { id = article.Id }) %></td>
+                <td><%: Html.ActionLink(article.Title, "Show", new { id = article.Id }) %></td>
                 <td><%: article.AuthorUserName %></td>
                 <td><%: article.Summary %></td>
             </tr>

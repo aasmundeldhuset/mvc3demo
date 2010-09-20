@@ -20,13 +20,14 @@ namespace WebApp.Controllers
         {
             var articles = from article in _repo.GetAll<Article>().ToList()
                            orderby article.Title
-                           select new ArticleViewModel(article);
+                           select new ArticleListModel(article);
             return View(articles);
         }
 
         public ActionResult Show(int id)
         {
-            return View();
+            var article = _repo.Get<Article>(id);
+            return View(new ArticleDetailsModel(article));
         }
 
         public ActionResult Create()
