@@ -45,6 +45,8 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Data.Entity" />
     <Reference Include="System.Web" />
+    <Reference Include="System.Web.Mvc, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Web.Routing" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -54,6 +56,7 @@
   <ItemGroup>
     <Compile Include="BusinessLogic\GradeLogicTests.cs" />
     <Compile Include="BusinessLogic\Utilities\MiniLanguageFormatterTests.cs" />
+    <Compile Include="Controllers\GradeControllerTests.cs" />
     <Compile Include="Domain\ArticleTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -65,6 +68,10 @@
     <ProjectReference Include="..\Domain\Domain.csproj">
       <Project>{AACDF4A3-75B7-4FCF-83D4-3CEFB650D01B}</Project>
       <Name>Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\WebApp\WebApp.csproj">
+      <Project>{A2614189-CCF9-4EB0-8371-EB30E98E8892}</Project>
+      <Name>WebApp</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

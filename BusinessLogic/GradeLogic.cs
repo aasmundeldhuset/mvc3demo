@@ -11,12 +11,16 @@ namespace BusinessLogic
     {
         private readonly IRepository _repo;
 
+        public GradeLogic()
+        {
+        }
+
         public GradeLogic(IRepository repo)
         {
             _repo = repo;
         }
 
-        public void GradeArticle(int articleId, string currentUserName, int gradeValue)
+        public virtual void GradeArticle(int articleId, string currentUserName, int gradeValue)
         {
             var article = _repo.Get<Article>(articleId);
             var user = _repo.GetWhere<User>(u => u.UserName == currentUserName).Single();

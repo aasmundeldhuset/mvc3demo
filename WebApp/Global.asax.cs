@@ -1,6 +1,7 @@
 ﻿using System.Configuration;
 using System.Web.Mvc;
 using System.Web.Routing;
+using BusinessLogic;
 using Commons;
 using Domain;
 using Migrations;
@@ -34,7 +35,7 @@ namespace WebApp
 
         protected override IKernel CreateKernel()
         {
-            return new StandardKernel(new RepoModule());
+            return new StandardKernel(new RepoModule(), new LogicModule());
         }
 
         private static void MigrateDatabase()
