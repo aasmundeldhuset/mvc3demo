@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using BusinessLogic.Utilities;
 using Domain;
 
 namespace WebApp.ViewModels
@@ -17,14 +18,7 @@ namespace WebApp.ViewModels
             Title = article.Title;
             AuthorUserName = article.Author.UserName;
             Summary = article.Summary;
-
-            string encoded = HttpUtility.HtmlEncode(article.Body);
-            var paragraphs = encoded.Split('\n').Select(p => "<p>" + p + "</p>");
-            string encodedWithParagraphs = string.Concat(paragraphs);
-            Body = new HtmlString(
-                encodedWithParagraphs
-                .Replace("[b]", "<strong>")
-                .Replace("[/b]", "</strong>"));
+            Body = MiniLanguageFormatter.Format(article.Body);
         }
     }
 }
