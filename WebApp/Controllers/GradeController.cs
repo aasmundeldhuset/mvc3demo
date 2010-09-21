@@ -19,6 +19,7 @@ namespace WebApp.Controllers
         }
         
         [HttpPost]
+        [Authorize(Roles = "User")]
         public ActionResult GradeArticle(int id, int gradeValue)
         {
             _logic.GradeArticle(id, CurrentUser.Identity.Name, gradeValue);

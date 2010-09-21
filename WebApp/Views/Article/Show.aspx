@@ -22,15 +22,16 @@
         <%: Html.ActionLink("Back to article list", "Index") %>
     </p>
 
-    <h3>Voice your opinion on this article</h3>
+    <% if (User.IsInRole("User")) { %>
+        <h3>Voice your opinion on this article</h3>
 
-    <% using (Html.BeginForm("GradeArticle", "Grade", new {id = RouteData.Values["id"]})) { %>
-        <% for (int grade = Constants.MinGradeValue; grade <= Constants.MaxGradeValue; ++grade) { %>
-            <%= Html.RadioButton("gradeValue", grade, new {id = "gradeValue" + grade}) %>
-            <label for="gradeValue<%= grade %>"><%= grade %></label>
+        <% using (Html.BeginForm("GradeArticle", "Grade", new {id = RouteData.Values["id"]})) { %>
+            <% for (int grade = Constants.MinGradeValue; grade <= Constants.MaxGradeValue; ++grade) { %>
+                <%= Html.RadioButton("gradeValue", grade, new {id = "gradeValue" + grade}) %>
+                <label for="gradeValue<%= grade %>"><%= grade %></label>
+            <% } %>
+            <input type="submit" value="Submit grade" />
         <% } %>
-        <input type="submit" value="Submit grade" />
     <% } %>
-
 </asp:Content>
 
