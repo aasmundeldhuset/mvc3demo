@@ -3,6 +3,19 @@
 
 <asp:Content ContentPlaceHolderID="TitleContent" runat="server">NaN - Articles</asp:Content>
 
+<asp:Content ContentPlaceHolderID="HeaderContent" runat="server">
+    <script type="text/javascript" src="../../Scripts/jquery-1.4.1-vsdoc.js"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#submitGrade").hide();
+            $("input[type=radio].gradeValue").click(function () {
+                $("#gradeForm").submit();
+            });
+        });
+    </script>
+</asp:Content>
+
 <asp:Content ContentPlaceHolderID="MainContent" runat="server">
 
     <h2><%: Model.Title %></h2>
@@ -25,12 +38,12 @@
     <% if (User.IsInRole("User")) { %>
         <h3>Voice your opinion on this article</h3>
 
-        <% using (Html.BeginForm("GradeArticle", "Grade", new {id = RouteData.Values["id"]})) { %>
+        <% using (Html.BeginForm("GradeArticle", "Grade", new {id = RouteData.Values["id"]}, FormMethod.Post, new {id = "gradeForm"})) { %>
             <% for (int grade = Constants.MinGradeValue; grade <= Constants.MaxGradeValue; ++grade) { %>
-                <%= Html.RadioButton("gradeValue", grade, new {id = "gradeValue" + grade}) %>
+                <%= Html.RadioButton("gradeValue", grade, new {id = "gradeValue" + grade, @class = "gradeValue"}) %>
                 <label for="gradeValue<%= grade %>"><%= grade %></label>
             <% } %>
-            <input type="submit" value="Submit grade" />
+            <input type="submit" id="submitGrade" value="Submit grade" />
         <% } %>
     <% } %>
 </asp:Content>
