@@ -18,7 +18,7 @@
         <% foreach (var article in Model) { %>
     
             <tr>
-                <td><%: Html.ActionLink(article.Title, "Show", new { id = article.Id }) %></td>
+                <td><%: Html.ActionLink(article.Title, "Show", new { id = article.Id }) %> (<%= Html.ActionLink("edit", "Edit", new{id = article.Id}) %>)</td>
                 <td><%: article.AuthorUserName %></td>
                 <td><%: article.Summary %></td>
             </tr>

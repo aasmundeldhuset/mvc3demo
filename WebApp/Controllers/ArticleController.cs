@@ -32,61 +32,32 @@ namespace WebApp.Controllers
 
         public ActionResult Create()
         {
-            return View();
+            var currentUser = _repo.GetWhere<User>(u => u.UserName == User.Identity.Name).Single();
+            var article = new Article {Author = currentUser, Title = "New article", Summary = "", Body = ""};
+            _repo.AddAllAndSave(article);
+            return RedirectToAction("Edit", new {id = article.Id});
         }
 
-        [HttpPost]
-        public ActionResult Create(Article article)
-        {
-            try
-            {
-                // TODO: Add insert logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
-        
         public ActionResult Edit(int id)
         {
-            return View();
+            return View(_repo.Get<Article>(id));
         }
 
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult Edit(Article article)
         {
             try
             {
-                // TODO: Add update logic here
- 
+                var dbArticle = _repo.Get<Article>(article.Id);
+                dbArticle.Title = article.Title;
+                dbArticle.Summary = article.Summary;
+                dbArticle.Body = article.Body;
+                _repo.SaveChanges();
                 return RedirectToAction("Index");
             }
             catch
             {
-                return View();
-            }
-        }
-
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add delete logic here
- 
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
+                return View(article);
             }
         }
     }
