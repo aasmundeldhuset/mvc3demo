@@ -79,9 +79,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Global.asax" />
-    <Content Include="Views\Article\Edit.aspx" />
-    <Content Include="Views\Article\Index.aspx" />
-    <Content Include="Views\Article\Show.aspx" />
+    <None Include="Views\Article\Edit.cshtml" />
+    <None Include="Views\Article\Index.cshtml" />
+    <None Include="Views\Article\Show.cshtml" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>

@@ -26,6 +26,7 @@ namespace WebApp.Controllers
 
         public ActionResult Show(int id)
         {
+            ViewBag.Id = id;
             var article = _repo.Get<Article>(id);
             return View(new ArticleDetailsModel(article, CurrentUser.Identity.Name));
         }

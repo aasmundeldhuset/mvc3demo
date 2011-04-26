@@ -1,0 +1,49 @@
+﻿@model WebApp.ViewModels.ArticleDetailsModel
+
+@using Commons
+
+@{
+    ViewBag.Title = "NaN - Articles";
+}
+
+@section head {
+    <script type="text/javascript" src="../../Scripts/jquery-1.4.1-vsdoc.js"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#submitGrade").hide();
+            $("input[type=radio].gradeValue").click(function () {
+                $("#gradeForm").submit();
+            });
+        });
+    </script>
+}
+
+<h2>@Model.Title</h2>
+
+<p>
+    <strong>Author:</strong> @Model.AuthorUserName<br />
+    <strong>Grade average:</strong> @Model.GradeAverage
+</p>
+
+<p><em>@Model.Summary</em></p>
+
+@Model.Body
+
+<hr />
+
+<p>
+    @Html.ActionLink("Back to article list", "Index")
+</p>
+
+@if (User.IsInRole("User")) {
+    <h3>Voice your opinion on this article</h3>
+
+    using (Html.BeginForm("GradeArticle", "Grade", new {id = ViewBag.Id}, FormMethod.Post, new {id = "gradeForm"})) {
+        for (int grade = Constants.MinGradeValue; grade <= Constants.MaxGradeValue; ++grade) {
+            @Html.RadioButton("gradeValue", grade, new { id = "gradeValue" + grade, @class = "gradeValue" })
+            <label for="gradeValue@(grade)">@grade</label>
+        }
+        <input type="submit" id="submitGrade" value="Submit grade" />
+    }
+}
