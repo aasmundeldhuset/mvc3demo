@@ -4,6 +4,7 @@ using System.Web.Mvc;
 using BusinessLogic;
 using Domain;
 using Domain.Repository;
+using WebApp.Attributes;
 using WebApp.ViewModels;
 
 namespace WebApp.Controllers
@@ -50,10 +51,18 @@ namespace WebApp.Controllers
             return View(_repo.Get<Article>(id));
         }
 
+        [ActionName("Rediger")]
+        public ActionResult MinMetodeMedCustomNavn(int id)
+        {
+            return RedirectToAction("Edit", new {id});
+        }
+
         [HttpPost]
+        [Stopwatch]
         [Authorize(Roles = "User")]
         public ActionResult Edit(Article article)
         {
+            if (!ModelState.IsValid) return View(article);
             try
             {
                 var dbArticle = _repo.Get<Article>(article.Id);

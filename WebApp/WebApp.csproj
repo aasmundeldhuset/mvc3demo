@@ -33,6 +33,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="log4net, Version=1.2.10.0, Culture=neutral, PublicKeyToken=1b44e1d426115821, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\log4net.1.2.10\lib\2.0\log4net.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Ninject">
       <HintPath>..\BuildAssets\Ninject.dll</HintPath>
@@ -56,6 +60,7 @@
     <Reference Include="System.Web" />
     <Reference Include="System.Web.ApplicationServices" />
     <Reference Include="System.Web.Mvc, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Web.WebPages, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System.Xml.Linq">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
@@ -64,6 +69,8 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Attributes\LogAttribute.cs" />
+    <Compile Include="Attributes\StopwatchAttribute.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ArticleController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
@@ -79,9 +86,31 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Global.asax" />
+    <Content Include="packages.config" />
     <None Include="Views\Article\Edit.cshtml" />
     <None Include="Views\Article\Index.cshtml" />
     <None Include="Views\Article\Show.cshtml" />
+    <Content Include="Scripts\Felles\jquery-1.5.1-vsdoc.js" />
+    <Content Include="Scripts\Felles\jquery-1.5.1.js" />
+    <Content Include="Scripts\Felles\jquery-1.5.1.min.js" />
+    <Content Include="Scripts\Felles\jquery-ui-1.8.11.js" />
+    <Content Include="Scripts\Felles\jquery-ui-1.8.11.min.js" />
+    <Content Include="Scripts\Felles\jquery.unobtrusive-ajax.js" />
+    <Content Include="Scripts\Felles\jquery.unobtrusive-ajax.min.js" />
+    <Content Include="Scripts\Felles\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\Felles\jquery.validate.js" />
+    <Content Include="Scripts\Felles\jquery.validate.min.js" />
+    <Content Include="Scripts\Felles\jquery.validate.unobtrusive.js" />
+    <Content Include="Scripts\Felles\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\Felles\MicrosoftAjax.debug.js" />
+    <Content Include="Scripts\Felles\MicrosoftAjax.js" />
+    <Content Include="Scripts\Felles\MicrosoftMvcAjax.debug.js" />
+    <Content Include="Scripts\Felles\MicrosoftMvcAjax.js" />
+    <Content Include="Scripts\Felles\MicrosoftMvcValidation.debug.js" />
+    <Content Include="Scripts\Felles\MicrosoftMvcValidation.js" />
+    <Content Include="Scripts\Felles\modernizr-1.7.js" />
+    <Content Include="Scripts\Felles\modernizr-1.7.min.js" />
+    <Content Include="Scripts\wordcountvalidator.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -92,18 +121,6 @@
       <DependentUpon>Web.config</DependentUpon>
     </Content>
     <Content Include="Content\Site.css" />
-    <Content Include="Scripts\jquery-1.4.1.js" />
-    <Content Include="Scripts\jquery-1.4.1.min.js" />
-    <Content Include="Scripts\jquery-1.4.1-vsdoc.js" />
-    <Content Include="Scripts\jquery.validate.js" />
-    <Content Include="Scripts\jquery.validate.min.js" />
-    <Content Include="Scripts\jquery.validate-vsdoc.js" />
-    <Content Include="Scripts\MicrosoftAjax.js" />
-    <Content Include="Scripts\MicrosoftAjax.debug.js" />
-    <Content Include="Scripts\MicrosoftMvcAjax.js" />
-    <Content Include="Scripts\MicrosoftMvcAjax.debug.js" />
-    <Content Include="Scripts\MicrosoftMvcValidation.js" />
-    <Content Include="Scripts\MicrosoftMvcValidation.debug.js" />
     <Content Include="Views\Account\ChangePassword.aspx" />
     <Content Include="Views\Account\ChangePasswordSuccess.aspx" />
     <Content Include="Views\Account\LogOn.cshtml" />
