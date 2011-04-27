@@ -1,8 +1,11 @@
-﻿using System.Linq;
+﻿using System.ComponentModel.DataAnnotations;
+using System.Linq;
 using Commons;
+using Domain.Validation;
 
 namespace Domain
 {
+    [MetadataType(typeof(ArticleValidation))]
     public partial class Article
     {
         public virtual decimal GetGradeAverage()
