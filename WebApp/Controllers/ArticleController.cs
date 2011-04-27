@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
+using BusinessLogic;
 using Domain;
 using Domain.Repository;
 using WebApp.ViewModels;
@@ -10,10 +11,12 @@ namespace WebApp.Controllers
     public class ArticleController : BaseController
     {
         private readonly IRepository _repo;
+        private readonly AttachmentLogic _attachmentLogic;
 
-        public ArticleController(IRepository repo)
+        public ArticleController(IRepository repo, AttachmentLogic attachmentLogic)
         {
             _repo = repo;
+            _attachmentLogic = attachmentLogic;
         }
 
         public ActionResult Index()
@@ -41,6 +44,7 @@ namespace WebApp.Controllers
 
         public ActionResult Edit(int id)
         {
+            ViewBag.Id = id;
             return View(_repo.Get<Article>(id));
         }
 
@@ -54,12 +58,23 @@ namespace WebApp.Controllers
                 dbArticle.Summary = article.Summary;
                 dbArticle.Body = article.Body;
                 _repo.SaveChanges();
+
+                if (Request.Files != null && Request.Files.Count > 0 && Request.Files[0].ContentLength > 0)
+                {
+                    _attachmentLogic.SaveAttachment(article.Id, Request.Files[0]);
+                }
+                
                 return RedirectToAction("Index");
             }
             catch
             {
                 return View(article);
             }
+        }
+
+        public FileStreamResult DownloadAttachment(int id)
+        {
+            return new FileStreamResult(_attachmentLogic.LoadAttachment(id), "application/pdf");
         }
     }
 }

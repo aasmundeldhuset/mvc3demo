@@ -6,7 +6,8 @@
 
 <h2>Edit article</h2>
 
-@using (Html.BeginForm()) {
+@using (Html.BeginForm("Edit", "Article", new {id = ViewBag.Id}, FormMethod.Post, new {enctype = "multipart/form-data"}))
+{
 
     @Html.ValidationSummary(true)
         
@@ -34,6 +35,13 @@
     <div class="editor-field">
         @Html.TextAreaFor(model => model.Body, 30, 100, null)
         @Html.ValidationMessageFor(model => model.Body)
+    </div>
+
+    <div class="editor-label">
+        Attachment:
+    </div>
+    <div class="editor-field">
+        <input type="file" name="file" id="file" size="" />
     </div>
 
     <p><input type="submit" value="Save" /></p>

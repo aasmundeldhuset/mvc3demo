@@ -23,7 +23,8 @@
 
 <p>
     <strong>Author:</strong> @Model.AuthorUserName<br />
-    <strong>Grade average:</strong> @Model.GradeAverage
+    <strong>Grade average:</strong> @Model.GradeAverage<br />
+    @Html.ActionLink("Download attachment", "DownloadAttachment", new { id = ViewBag.Id })
 </p>
 
 <p><em>@Model.Summary</em></p>
