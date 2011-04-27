@@ -34,6 +34,7 @@ namespace WebApp.Controllers
             return View(new ArticleDetailsModel(article, CurrentUser.Identity.Name));
         }
 
+        [Authorize(Roles = "User")]
         public ActionResult Create()
         {
             var currentUser = _repo.GetWhere<User>(u => u.UserName == User.Identity.Name).Single();
@@ -42,6 +43,7 @@ namespace WebApp.Controllers
             return RedirectToAction("Edit", new {id = article.Id});
         }
 
+        [Authorize(Roles = "User")]
         public ActionResult Edit(int id)
         {
             ViewBag.Id = id;
@@ -49,6 +51,7 @@ namespace WebApp.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "User")]
         public ActionResult Edit(Article article)
         {
             try
