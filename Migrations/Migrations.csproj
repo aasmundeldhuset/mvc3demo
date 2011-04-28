@@ -50,8 +50,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ExternallyCallableMigration.cs" />
+    <Compile Include="Migrations\M004_AddingEmailAddressToArticleModel.cs" />
     <Compile Include="Migrations\M002_AddingGradeModel.cs" />
     <Compile Include="Migrations\M001_AddingArticleModel.cs" />
+    <Compile Include="Migrations\M003_AddingPublishDateToArticleModel.cs" />
     <Compile Include="MigrationUtilities.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Migrations\M000_InitialVersion.cs" />

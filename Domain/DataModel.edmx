@@ -32,6 +32,8 @@
           <Property Name="Summary" Type="ntext" Nullable="false" />
           <Property Name="Body" Type="ntext" Nullable="false" />
           <Property Name="Version" Type="timestamp" Nullable="false" StoreGeneratedPattern="Computed" />
+          <Property Name="PublishDate" Type="datetime" />
+          <Property Name="EmailAddress" Type="nvarchar" MaxLength="255" />
         </EntityType>
         <EntityType Name="aspnet_Users">
           <Key>
@@ -138,6 +140,8 @@
           <Property Type="Binary" Name="Version" Nullable="false" MaxLength="8" FixedLength="true" annotation:StoreGeneratedPattern="Computed" ConcurrencyMode="Fixed" />
           <NavigationProperty Name="Author" Relationship="Domain.FK__Article__AuthorId__aspnet_Users__UserId" FromRole="Article" ToRole="User" />
           <NavigationProperty Name="Grades" Relationship="Domain.FK__Grade__ArticleId__Article__Id" FromRole="Article" ToRole="Grade" />
+          <Property Type="DateTime" Name="PublishDate" />
+          <Property Type="String" Name="EmailAddress" MaxLength="255" FixedLength="false" Unicode="true" />
         </EntityType>
         <Association Name="FK__Article__AuthorId__aspnet_Users__UserId">
           <End Type="Domain.User" Role="User" Multiplicity="1" />
@@ -205,6 +209,8 @@
           <EntitySetMapping Name="Articles">
             <EntityTypeMapping TypeName="Domain.Article">
               <MappingFragment StoreEntitySet="Article">
+                <ScalarProperty Name="EmailAddress" ColumnName="EmailAddress" />
+                <ScalarProperty Name="PublishDate" ColumnName="PublishDate" />
                 <ScalarProperty Name="Version" ColumnName="Version" />
                 <ScalarProperty Name="Body" ColumnName="Body" />
                 <ScalarProperty Name="Summary" ColumnName="Summary" />

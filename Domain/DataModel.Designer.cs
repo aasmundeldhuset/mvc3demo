@@ -335,6 +335,54 @@ namespace Domain
         private global::System.Byte[] _Version;
         partial void OnVersionChanging(global::System.Byte[] value);
         partial void OnVersionChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.DateTime> PublishDate
+        {
+            get
+            {
+                return _PublishDate;
+            }
+            set
+            {
+                OnPublishDateChanging(value);
+                ReportPropertyChanging("PublishDate");
+                _PublishDate = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("PublishDate");
+                OnPublishDateChanged();
+            }
+        }
+        private Nullable<global::System.DateTime> _PublishDate;
+        partial void OnPublishDateChanging(Nullable<global::System.DateTime> value);
+        partial void OnPublishDateChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String EmailAddress
+        {
+            get
+            {
+                return _EmailAddress;
+            }
+            set
+            {
+                OnEmailAddressChanging(value);
+                ReportPropertyChanging("EmailAddress");
+                _EmailAddress = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("EmailAddress");
+                OnEmailAddressChanged();
+            }
+        }
+        private global::System.String _EmailAddress;
+        partial void OnEmailAddressChanging(global::System.String value);
+        partial void OnEmailAddressChanged();
 
         #endregion
     
