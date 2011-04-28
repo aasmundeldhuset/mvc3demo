@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+﻿using System;
 using System.Linq;
 using System.Web.Mvc;
 using BusinessLogic;
@@ -22,7 +22,7 @@ namespace WebApp.Controllers
 
         public ActionResult Index()
         {
-            var articles = from article in _repo.GetAll<Article>().ToList()
+            var articles = from article in _repo.GetAll<Article>().Where(u => u.PublishDate <= DateTime.Today).ToList()
                            orderby article.Title
                            select new ArticleListModel(article);
             return View(articles);
@@ -39,7 +39,7 @@ namespace WebApp.Controllers
         public ActionResult Create()
         {
             var currentUser = _repo.GetWhere<User>(u => u.UserName == User.Identity.Name).Single();
-            var article = new Article {Author = currentUser, Title = "New article", Summary = "", Body = ""};
+            var article = new Article {Author = currentUser, Title = "New article", Summary = "", Body = "", EmailAddress = "", PublishDate = DateTime.Today};
             _repo.AddAllAndSave(article);
             return RedirectToAction("Edit", new {id = article.Id});
         }
@@ -69,6 +69,8 @@ namespace WebApp.Controllers
                 dbArticle.Title = article.Title;
                 dbArticle.Summary = article.Summary;
                 dbArticle.Body = article.Body;
+                dbArticle.PublishDate = article.PublishDate;
+                dbArticle.EmailAddress = article.EmailAddress;
                 _repo.SaveChanges();
 
                 if (Request.Files != null && Request.Files.Count > 0 && Request.Files[0].ContentLength > 0)

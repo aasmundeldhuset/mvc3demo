@@ -69,8 +69,10 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Areas\UnobtrusiveAjax\UnobtrusiveAjaxAreaRegistration.cs" />
     <Compile Include="Attributes\LogAttribute.cs" />
     <Compile Include="Attributes\StopwatchAttribute.cs" />
+    <Compile Include="Binders\DateTimeBinder.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ArticleController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
@@ -79,6 +81,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\RichTextHelper.cs" />
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\ArticleListModel.cs" />
@@ -87,6 +90,7 @@
   <ItemGroup>
     <Content Include="Global.asax" />
     <Content Include="packages.config" />
+    <Content Include="Areas\UnobtrusiveAjax\Views\Web.config" />
     <None Include="Views\Article\Edit.cshtml" />
     <None Include="Views\Article\Index.cshtml" />
     <None Include="Views\Article\Show.cshtml" />
@@ -131,9 +135,14 @@
     <Content Include="Views\Shared\LogOnUserControl.ascx" />
     <Content Include="Views\Shared\Site.Master" />
     <Content Include="Views\Web.config" />
+    <Content Include="Views\Shared\DisplayTemplates\EmailAddress.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\DateTime.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Areas\UnobtrusiveAjax\Controllers\" />
+    <Folder Include="Areas\UnobtrusiveAjax\Models\" />
+    <Folder Include="Areas\UnobtrusiveAjax\Views\Shared\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BusinessLogic\BusinessLogic.csproj">

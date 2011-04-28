@@ -1,13 +1,13 @@
 ﻿@model WebApp.ViewModels.ArticleDetailsModel
 
 @using Commons
+@using WebApp.Helpers;
 
 @{
     ViewBag.Title = "NaN - Articles";
 }
 
 @section head {
-    <script type="text/javascript" src="../../Scripts/jquery-1.4.1-vsdoc.js"></script>
 
     <script type="text/javascript">
         $(document).ready(function () {
@@ -22,14 +22,14 @@
 <h2>@Model.Title</h2>
 
 <p>
-    <strong>Author:</strong> @Model.AuthorUserName<br />
+    <strong>Author:</strong> @Model.AuthorUserName (@Html.DisplayFor(m => m.EmailAddress)<br />
     <strong>Grade average:</strong> @Model.GradeAverage<br />
     @Html.ActionLink("Download attachment", "DownloadAttachment", new { id = ViewBag.Id })
 </p>
 
 <p><em>@Model.Summary</em></p>
 
-@Model.Body
+@Html.Rich(@Model.Body)
 
 <hr />
 

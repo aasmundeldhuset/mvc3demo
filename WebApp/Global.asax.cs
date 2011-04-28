@@ -1,4 +1,5 @@
-﻿using System.Configuration;
+﻿using System;
+using System.Configuration;
 using System.Web.Mvc;
 using System.Web.Routing;
 using BusinessLogic;
@@ -8,13 +9,11 @@ using Migrations;
 using Ninject;
 using Ninject.Web.Mvc;
 using WebApp.Attributes;
+using WebApp.Binders;
 using log4net.Config;
 
 namespace WebApp
 {
-    // Note: For instructions on enabling IIS6 or IIS7 classic mode, 
-    // visit http://go.microsoft.com/?LinkId=9394801
-
     public class MvcApplication : NinjectHttpApplication
     {
         public static void RegisterRoutes(RouteCollection routes)
@@ -36,10 +35,14 @@ namespace WebApp
         protected override void OnApplicationStarted()
         {
             XmlConfigurator.Configure();
+
             AreaRegistration.RegisterAllAreas();
+
             RegisterRoutes(RouteTable.Routes);
-            // Register global filter
+            
             GlobalFilters.Filters.Add(new LogAttribute());
+
+            ModelBinders.Binders[typeof(DateTime)] = new DateTimeBinder();
 
             MigrateDatabase();
         }

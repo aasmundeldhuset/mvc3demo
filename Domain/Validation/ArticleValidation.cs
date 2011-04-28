@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
 
 namespace Domain.Validation
 {
@@ -17,5 +13,9 @@ namespace Domain.Validation
         [DisplayName("Test")]
         [Required, StringLength(100, MinimumLength = 10)]
         public string Summary { get; set; }
+
+        //[UIHint("EmailAddress")]
+        [DataType(DataType.EmailAddress)]
+        public string EmailAddress { get; set; }
     }
 }
