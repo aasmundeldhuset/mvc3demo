@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Text;
 using System.Web.Mvc;
 using BusinessLogic;
 using Domain;
@@ -89,6 +90,18 @@ namespace WebApp.Controllers
         public FileStreamResult DownloadAttachment(int id)
         {
             return new FileStreamResult(_attachmentLogic.LoadAttachment(id), "application/pdf");
+        }
+
+        public JsonResult ShowAsJson(int id)
+        {
+            var article = _repo.Get<Article>(id);
+            return new JsonResult
+                   {
+                       Data = new ArticleDetailsModel(article, CurrentUser.Identity.Name),
+                       ContentType = "text/json",
+                       ContentEncoding = Encoding.UTF8,
+                       JsonRequestBehavior = JsonRequestBehavior.AllowGet
+                   };
         }
     }
 }
