@@ -39,10 +39,8 @@ namespace WebApp.Controllers
         [Authorize(Roles = "User")]
         public ActionResult Create()
         {
-            var currentUser = _repo.GetWhere<User>(u => u.UserName == User.Identity.Name).Single();
-            var article = new Article {Author = currentUser, Title = "New article", Summary = "", Body = "", EmailAddress = "", PublishDate = DateTime.Today};
-            _repo.AddAllAndSave(article);
-            return RedirectToAction("Edit", new {id = article.Id});
+            var article = new Article {Title = "New article", Summary = "", Body = "", EmailAddress = "", PublishDate = DateTime.Today};
+            return View("Edit", article);
         }
 
         [Authorize(Roles = "User")]
@@ -66,7 +64,17 @@ namespace WebApp.Controllers
             if (!ModelState.IsValid) return View(article);
             try
             {
-                var dbArticle = _repo.Get<Article>(article.Id);
+                Article dbArticle;
+                if (article.Id == 0)
+                {
+                    var currentUser = _repo.GetWhere<User>(u => u.UserName == User.Identity.Name).Single();
+                    dbArticle = new Article {Author = currentUser};
+                    _repo.Add(dbArticle);
+                }
+                else
+                {
+                    dbArticle = _repo.Get<Article>(article.Id);
+                }
                 dbArticle.Title = article.Title;
                 dbArticle.Summary = article.Summary;
                 dbArticle.Body = article.Body;
